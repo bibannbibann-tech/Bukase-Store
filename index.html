@@ -3,248 +3,402 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BUKASE STORE | Packaging Solutions</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,sans-serif;background:#f7f7f5;color:#222}
-header{background:#fff;padding:20px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee}
-.logo{font-size:23px;font-weight:800;letter-spacing:1px}
-.logo span{color:#b87543}
-nav a{color:#222;text-decoration:none;margin-left:20px;font-size:14px}
-.hero{padding:75px 7%;background:#e9e1d6}
-.hero small{letter-spacing:3px;font-weight:bold;color:#8b603d}
-.hero h1{font-size:clamp(34px,5vw,58px);max-width:650px;line-height:1.1;margin:18px 0}
-.hero p{color:#555;line-height:1.8;max-width:520px}
-main{padding:45px 7% 70px}
-.section-head{margin-bottom:25px}
-.section-head h2{font-size:30px;margin-bottom:8px}
-.section-head p{color:#666;line-height:1.6}
-#backBtn{display:none;margin:0 0 22px;padding:11px 16px;background:#fff;border:1px solid #ddd;border-radius:8px;cursor:pointer}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
-.card{background:white;border-radius:12px;overflow:hidden;border:1px solid #eee;transition:.2s}
-.card.clickable{cursor:pointer}
-.card.clickable:hover{transform:translateY(-4px);box-shadow:0 10px 25px #0000000d}
-.card img{width:100%;height:220px;object-fit:cover;background:#eee;display:block}
-.card-body{padding:20px}
-.tag{font-size:11px;letter-spacing:1px;color:#a16a3d;font-weight:bold;text-transform:uppercase}
-.card h3{margin:10px 0;font-size:21px}
-.card p{color:#666;line-height:1.6;font-size:14px;min-height:42px}
-.price{font-size:19px;font-weight:bold;margin-top:16px}
-.hint{font-size:12px;color:#8a6749;margin-top:12px}
-.empty{padding:35px;background:white;border-radius:12px;line-height:1.8}
-footer{background:#252525;color:white;padding:30px 7%;line-height:1.8}
-footer p{color:#ccc;font-size:14px}
-@media(max-width:750px){
- header{padding:18px 5%;flex-wrap:wrap;gap:14px}
- nav a{margin-left:12px}
- .hero{padding:55px 5%}
- main{padding:35px 5% 55px}
- .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
- .card img{height:155px}
- .card-body{padding:14px}
- .card h3{font-size:17px}
- .card p{font-size:13px}
- .price{font-size:16px}
-}
-@media(max-width:420px){
- .grid{grid-template-columns:1fr}
- .card img{height:220px}
-}
+header{background:#fff;padding:20px 7%;display:flex;justify-content:space-between;align-items:center;gap:15px;border-bottom:1px solid #eee;flex-wrap:wrap}
+.logo{font-size:23px;font-weight:800}.logo span{color:#b87543}
+button{cursor:pointer;border:0;border-radius:7px;padding:11px 15px;background:#292929;color:white}
+button.secondary{background:#eee;color:#222}
+input,select,textarea{width:100%;padding:11px;margin:6px 0 12px;border:1px solid #ddd;border-radius:7px;font:inherit}
+.hero{padding:65px 7%;background:#e9e1d6}
+.hero small,.tag{color:#9b693e;font-weight:bold;letter-spacing:2px}
+.hero h1{font-size:clamp(32px,5vw,56px);max-width:650px;line-height:1.1}
+.hero p{line-height:1.8;color:#555}
+main{padding:40px 7% 65px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.card{background:white;border:1px solid #eee;border-radius:12px;overflow:hidden;cursor:pointer}
+.card img{width:100%;height:200px;object-fit:cover;background:#eee}
+.card-body{padding:17px}.card p{font-size:14px;color:#666;line-height:1.6}
+.price{font-size:18px;font-weight:bold;margin-top:12px}
+#back{display:none;margin-bottom:20px}
+.panel{background:white;border:1px solid #ddd;border-radius:12px;padding:20px;margin:20px 0}
+.hidden{display:none!important}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.row button{margin:3px 0}
+footer{background:#252525;color:white;padding:28px 7%}
+.note{font-size:13px;color:#666;line-height:1.6}
+@media(max-width:700px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}main{padding:30px 5%}.hero{padding:45px 5%}.card img{height:145px}.card-body{padding:12px}}
+@media(max-width:420px){.grid{grid-template-columns:1fr}.card img{height:210px}}
 </style>
 </head>
 <body>
-
 <header>
   <div class="logo">BUKASE <span>STORE</span></div>
-  <nav>
-    <a href="#beranda">Beranda</a>
-    <a href="#produk">Katalog Produk</a>
-  </nav>
+  <div class="row">
+    <button class="secondary" onclick="home()">Beranda / Katalog</button>
+    <button onclick="openLogin()">Admin</button>
+  </div>
 </header>
 
-<section class="hero" id="beranda">
+<section class="hero">
   <small>PACKAGING SOLUTIONS</small>
   <h1>Solusi Kemasan untuk Bisnis Anda</h1>
-  <p>
-    Temukan berbagai pilihan kemasan untuk usaha makanan,
-    toko, dan kebutuhan produk Anda dalam satu katalog.
-  </p>
+  <p>Temukan kemasan yang sesuai untuk usaha dan kebutuhan produk Anda.</p>
 </section>
 
-<main id="produk">
-  <div class="section-head">
-    <h2 id="pageTitle">Katalog Produk</h2>
-    <p id="pageDesc">Pilih kategori untuk melihat berbagai pilihan produk kemasan kami.</p>
-  </div>
+<main>
+  <button id="back" class="secondary" onclick="home()">← Kembali</button>
+  <h2 id="title">Katalog Produk</h2>
+  <p id="desc">Pilih produk untuk melihat detail, ukuran, dan harga.</p>
+  <p id="status" class="note">Menghubungkan ke database...</p>
+  <div id="catalog" class="grid"></div>
 
-  <button id="backBtn" onclick="showCategories()">← Kembali ke kategori</button>
-  <div class="grid" id="catalog"></div>
+  <section id="detail" class="panel hidden"></section>
+
+  <section id="login" class="panel hidden">
+    <h2>Login Admin</h2>
+    <label>Email admin</label>
+    <input id="email" type="email" placeholder="Email akun admin">
+    <label>Password</label>
+    <input id="password" type="password" placeholder="Password akun admin">
+    <button onclick="login()">Masuk</button>
+    <p id="loginMsg" class="note"></p>
+  </section>
+
+  <section id="admin" class="panel hidden">
+    <h2>Panel Admin</h2>
+    <p id="adminMsg" class="note">Login admin berhasil.</p>
+    <button class="secondary" onclick="logout()">Keluar</button>
+    <hr>
+    <h3 id="formTitle">Tambah Produk</h3>
+    <input id="pid" type="hidden">
+    <label>Nama produk</label><input id="pname" placeholder="Contoh: Snap Box">
+    <label>Kategori</label><input id="pcat" placeholder="Contoh: Food Packaging">
+    <label>Harga dasar (angka saja)</label><input id="pprice" type="number" min="0" placeholder="1500">
+    <label>Stok</label><input id="pstock" type="number" min="0" value="0">
+    <label>URL gambar</label><input id="pimage" placeholder="https://...">
+    <label>Deskripsi</label><textarea id="pdesc" placeholder="Deskripsi produk"></textarea>
+    <div class="row">
+      <button onclick="saveProduct()">Simpan Produk</button>
+      <button class="secondary" onclick="clearForm()">Batal</button>
+    </div>
+    <hr>
+    <h3>Produk Tersimpan</h3>
+    <div id="adminProducts"></div>
+    <hr>
+    <h3>Tambah Ukuran / Varian</h3>
+    <label>Pilih produk</label><select id="variantProduct"></select>
+    <label>Nama ukuran atau varian</label><input id="vname" placeholder="Contoh: Ukuran 20 x 20 cm">
+    <label>Harga varian</label><input id="vprice" type="number" min="0" placeholder="2000">
+    <label>Satuan</label><input id="vunit" value="pcs" placeholder="pcs / roll">
+    <button onclick="saveVariant()">Tambah Varian</button>
+    <div id="variantMsg" class="note"></div>
+  </section>
 </main>
 
 <footer>
   <strong>BUKASE STORE</strong>
   <p>Packaging Solutions for Your Business</p>
-  <p>Katalog produk kemasan untuk kebutuhan usaha Anda.</p>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-const products = [
-  {
-    id:"food",
-    name:"Food Packaging",
-    desc:"Berbagai kemasan untuk makanan dan kebutuhan usaha kuliner.",
-    image:"https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85",
-    type:"category"
-  },
-  {
-    id:"paper",
-    name:"Paper Bag",
-    desc:"Tas kertas untuk toko, produk, dan kebutuhan bisnis.",
-    image:"https://images.unsplash.com/photo-1607166452427-7e4477079cb9?auto=format&fit=crop&w=900&q=85",
-    type:"category"
-  },
-  {
-    id:"plastic",
-    name:"Plastik Roll",
-    desc:"Pilihan plastik roll dengan tampilan doff dan glossy.",
-    image:"https://images.unsplash.com/photo-1605600659873-d808a13e4d9a?auto=format&fit=crop&w=900&q=85",
-    type:"category"
-  }
-];
+const SUPABASE_URL = "https://oprddybskpjcrkzwaoul.supabase.co";
+const SUPABASE_KEY = "sb_publishable_QGnh3EIRc5_11cMDLDrsEA__Cd9s1Aa";
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-const foodProducts = [
-  {
-    name:"Snap Box",
-    desc:"Kotak makanan praktis untuk kebutuhan usaha kuliner.",
-    image:"https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85",
-    price:"Rp1.500 / pcs"
-  },
-  {
-    name:"Box Catering",
-    desc:"Kemasan untuk catering, nasi kotak, dan pesanan makanan.",
-    image:"https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=900&q=85",
-    price:"Rp2.000 / pcs"
-  },
-  {
-    name:"Kemasan Makanan Lainnya",
-    desc:"Pilihan kemasan tambahan sesuai kebutuhan usaha.",
-    image:"https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85",
-    price:"Hubungi untuk harga"
-  }
-];
+let allProducts = [];
+let currentUser = null;
+let isAdmin = false;
 
-const paperProducts = [
-  {
-    name:"Paper Bag",
-    desc:"Tas kertas untuk membawa produk dan belanjaan.",
-    image:"https://images.unsplash.com/photo-1607166452427-7e4477079cb9?auto=format&fit=crop&w=900&q=85",
-    price:"Rp2.500 / pcs"
-  }
-];
+const $ = id => document.getElementById(id);
+const money = n => new Intl.NumberFormat("id-ID", {
+  style:"currency", currency:"IDR", maximumFractionDigits:0
+}).format(Number(n || 0));
 
-const plasticProducts = [
-  {
-    name:"Plastik Doff Roll",
-    desc:"Plastik roll dengan tampilan matte atau tidak mengilap.",
-    image:"https://images.unsplash.com/photo-1605600659873-d808a13e4d9a?auto=format&fit=crop&w=900&q=85",
-    price:"Rp85.000 / roll"
-  },
-  {
-    name:"Plastik Glossy Roll",
-    desc:"Plastik roll dengan tampilan mengilap.",
-    image:"https://images.unsplash.com/photo-1619631424523-3c3d1f7e9f6d?auto=format&fit=crop&w=900&q=85",
-    price:"Rp90.000 / roll"
-  }
-];
+function showPage(title, desc) {
+  $("title").textContent = title;
+  $("desc").textContent = desc || "";
+  $("catalog").replaceChildren();
+  $("detail").classList.add("hidden");
+  $("back").style.display = "inline-block";
+}
 
-const catalog = document.getElementById("catalog");
-const backBtn = document.getElementById("backBtn");
-const pageTitle = document.getElementById("pageTitle");
-const pageDesc = document.getElementById("pageDesc");
-
-function makeCard(item, clickable, label) {
+function makeCard(p, action) {
   const card = document.createElement("article");
-  card.className = "card" + (clickable ? " clickable" : "");
-
+  card.className = "card";
   const img = document.createElement("img");
-  img.src = item.image;
-  img.alt = item.name;
-  img.loading = "lazy";
-  img.onerror = function() {
-    this.style.display = "none";
-  };
+  img.src = p.image_url || "";
+  img.alt = p.name;
+  img.onerror = () => img.style.display = "none";
 
   const body = document.createElement("div");
   body.className = "card-body";
-
   const tag = document.createElement("div");
   tag.className = "tag";
-  tag.textContent = label || "BUKASE STORE";
+  tag.textContent = p.category || "Produk";
 
-  const title = document.createElement("h3");
-  title.textContent = item.name;
+  const h = document.createElement("h3");
+  h.textContent = p.name;
+  const d = document.createElement("p");
+  d.textContent = p.description || "Hubungi kami untuk informasi produk.";
+  const price = document.createElement("div");
+  price.className = "price";
+  price.textContent = money(p.price);
 
-  const desc = document.createElement("p");
-  desc.textContent = item.desc;
-
-  body.append(tag, title, desc);
-
-  if (item.price) {
-    const price = document.createElement("div");
-    price.className = "price";
-    price.textContent = item.price;
-    body.appendChild(price);
-  }
-
-  if (clickable) {
-    const hint = document.createElement("div");
-    hint.className = "hint";
-    hint.textContent = "Klik untuk melihat produk →";
-    body.appendChild(hint);
-    card.onclick = () => showCategory(item.id);
-  }
-
-  card.append(img, body);
+  body.append(tag,h,d,price);
+  card.append(img,body);
+  card.onclick = action;
   return card;
 }
 
-function showCategories() {
-  pageTitle.textContent = "Katalog Produk";
-  pageDesc.textContent = "Pilih kategori untuk melihat berbagai pilihan produk kemasan kami.";
-  backBtn.style.display = "none";
-  catalog.replaceChildren();
-
-  products.forEach(item => {
-    catalog.appendChild(makeCard(item, true, "Kategori Produk"));
-  });
+function visibleProducts() {
+  return allProducts.filter(p =>
+    !/paper\s*bowl/i.test((p.name || "") + " " + (p.category || ""))
+  );
 }
 
-function showCategory(id) {
-  catalog.replaceChildren();
-  backBtn.style.display = "inline-block";
+function home() {
+  $("back").style.display = "none";
+  $("detail").classList.add("hidden");
+  $("catalog").replaceChildren();
+  $("title").textContent = "Katalog Produk";
+  $("desc").textContent = "Pilih kategori untuk melihat produk kemasan kami.";
+  const groups = [...new Set(visibleProducts().map(p => p.category || "Lainnya"))];
 
-  let items = [];
-  if (id === "food") {
-    pageTitle.textContent = "Food Packaging";
-    pageDesc.textContent = "Pilih jenis kemasan makanan yang Anda butuhkan.";
-    items = foodProducts;
-  } else if (id === "paper") {
-    pageTitle.textContent = "Paper Bag";
-    pageDesc.textContent = "Pilihan tas kertas untuk berbagai kebutuhan.";
-    items = paperProducts;
-  } else if (id === "plastic") {
-    pageTitle.textContent = "Plastik Roll";
-    pageDesc.textContent = "Pilih jenis plastik roll: Doff atau Glossy.";
-    items = plasticProducts;
+  if (!groups.length) {
+    $("status").textContent = "Belum ada produk untuk ditampilkan.";
+    return;
   }
-
-  items.forEach(item => {
-    catalog.appendChild(makeCard(item, false, "Pilihan Produk"));
+  $("status").textContent = "";
+  groups.forEach(category => {
+    const card = document.createElement("article");
+    card.className = "card";
+    const body = document.createElement("div");
+    body.className = "card-body";
+    const h = document.createElement("h3");
+    h.textContent = category;
+    const count = document.createElement("p");
+    count.textContent = visibleProducts().filter(p => (p.category || "Lainnya") === category).length + " produk";
+    const btn = document.createElement("button");
+    btn.textContent = "Lihat Produk";
+    btn.onclick = () => showCategory(category);
+    body.append(h,count,btn);
+    card.append(body);
+    $("catalog").append(card);
   });
 }
 
-showCategories();
+function showCategory(category) {
+  showPage(category, "Pilih produk untuk melihat ukuran dan harga.");
+  visibleProducts().filter(p => (p.category || "Lainnya") === category)
+    .forEach(p => $("catalog").append(makeCard(p, () => showDetail(p))));
+}
+
+async function showDetail(p) {
+  showPage(p.name, p.description || "Detail produk");
+  $("catalog").replaceChildren();
+  const box = $("detail");
+  box.classList.remove("hidden");
+  box.replaceChildren();
+
+  const h = document.createElement("h2");
+  h.textContent = p.name;
+  const desc = document.createElement("p");
+  desc.textContent = p.description || "";
+  const price = document.createElement("h3");
+  price.textContent = "Harga dasar: " + money(p.price);
+  box.append(h,desc,price);
+
+  const heading = document.createElement("h3");
+  heading.textContent = "Ukuran dan harga";
+  box.append(heading);
+
+  const {data, error} = await db.from("product_variants")
+    .select("id,variant_name,price,unit")
+    .eq("product_id", p.id).order("id");
+
+  if (error) {
+    const msg = document.createElement("p");
+    msg.textContent = "Varian belum dapat dimuat.";
+    box.append(msg);
+    return;
+  }
+  if (!data.length) {
+    const msg = document.createElement("p");
+    msg.textContent = "Belum ada ukuran tambahan. Harga dasar ditampilkan di atas.";
+    box.append(msg);
+  }
+  data.forEach(v => {
+    const line = document.createElement("p");
+    line.textContent = v.variant_name + " — " + money(v.price) + " / " + (v.unit || "pcs");
+    box.append(line);
+  });
+}
+
+async function loadProducts() {
+  $("status").textContent = "Memuat produk...";
+  const {data,error} = await db.from("products").select("*").order("id");
+  if (error) {
+    $("status").textContent = "Gagal memuat produk. Periksa Publishable key dan akses tabel.";
+    console.error(error);
+    return;
+  }
+  allProducts = data || [];
+  $("status").textContent = "";
+  home();
+}
+
+function openLogin() {
+  $("login").classList.remove("hidden");
+  $("admin").classList.add("hidden");
+  $("login").scrollIntoView({behavior:"smooth"});
+}
+
+async function login() {
+  $("loginMsg").textContent = "Memeriksa akun...";
+  const {data,error} = await db.auth.signInWithPassword({
+    email:$("email").value.trim(),
+    password:$("password").value
+  });
+  if (error) {
+    $("loginMsg").textContent = "Login gagal: " + error.message;
+    return;
+  }
+  currentUser = data.user;
+  const {data:admin,error:adminError} = await db.from("admins")
+    .select("user_id").eq("user_id",currentUser.id).maybeSingle();
+
+  if (adminError || !admin) {
+    await db.auth.signOut();
+    currentUser = null;
+    $("loginMsg").textContent = "Akun ini tidak terdaftar sebagai admin.";
+    return;
+  }
+  isAdmin = true;
+  $("login").classList.add("hidden");
+  $("admin").classList.remove("hidden");
+  $("adminMsg").textContent = "Login sebagai " + currentUser.email;
+  await loadProducts();
+  renderAdminProducts();
+  $("admin").scrollIntoView({behavior:"smooth"});
+}
+
+async function logout() {
+  await db.auth.signOut();
+  currentUser = null;
+  isAdmin = false;
+  $("admin").classList.add("hidden");
+  home();
+}
+
+function clearForm() {
+  ["pid","pname","pcat","pprice","pstock","pimage","pdesc"].forEach(id => $(id).value = "");
+  $("pstock").value = 0;
+  $("formTitle").textContent = "Tambah Produk";
+}
+
+function editProduct(p) {
+  $("pid").value = p.id;
+  $("pname").value = p.name || "";
+  $("pcat").value = p.category || "";
+  $("pprice").value = p.price || 0;
+  $("pstock").value = p.stock || 0;
+  $("pimage").value = p.image_url || "";
+  $("pdesc").value = p.description || "";
+  $("formTitle").textContent = "Edit Produk #" + p.id;
+  $("admin").scrollIntoView({behavior:"smooth"});
+}
+
+async function saveProduct() {
+  if (!isAdmin) return alert("Silakan login admin.");
+  const name = $("pname").value.trim();
+  const category = $("pcat").value.trim();
+  if (!name || !category) return alert("Nama dan kategori wajib diisi.");
+
+  const record = {
+    name, category,
+    price:Number($("pprice").value || 0),
+    stock:Number($("pstock").value || 0),
+    image_url:$("pimage").value.trim() || null,
+    description:$("pdesc").value.trim() || null
+  };
+  const id = $("pid").value;
+  const result = id
+    ? await db.from("products").update(record).eq("id",id)
+    : await db.from("products").insert(record);
+
+  if (result.error) return alert("Gagal menyimpan: " + result.error.message);
+  alert("Produk berhasil disimpan.");
+  clearForm();
+  await loadProducts();
+  renderAdminProducts();
+}
+
+async function deleteProduct(p) {
+  if (!isAdmin || !confirm('Hapus produk "' + p.name + '"?')) return;
+  const {error} = await db.from("products").delete().eq("id",p.id);
+  if (error) return alert("Gagal menghapus: " + error.message);
+  await loadProducts();
+  renderAdminProducts();
+}
+
+function renderAdminProducts() {
+  if (!isAdmin) return;
+  $("adminProducts").replaceChildren();
+  $("variantProduct").replaceChildren();
+
+  visibleProducts().forEach(p => {
+    const line = document.createElement("div");
+    line.className = "panel";
+    const name = document.createElement("strong");
+    name.textContent = p.name + " — " + money(p.price);
+    const edit = document.createElement("button");
+    edit.textContent = "Edit";
+    edit.onclick = () => editProduct(p);
+    const del = document.createElement("button");
+    del.textContent = "Hapus";
+    del.className = "secondary";
+    del.onclick = () => deleteProduct(p);
+    line.append(name,document.createElement("br"),edit,del);
+    $("adminProducts").append(line);
+
+    const option = document.createElement("option");
+    option.value = p.id;
+    option.textContent = p.name;
+    $("variantProduct").append(option);
+  });
+}
+
+async function saveVariant() {
+  if (!isAdmin) return alert("Silakan login admin.");
+  const product_id = $("variantProduct").value;
+  const variant_name = $("vname").value.trim();
+  if (!product_id || !variant_name) return alert("Pilih produk dan isi nama varian.");
+  const {error} = await db.from("product_variants").insert({
+    product_id:Number(product_id),
+    variant_name,
+    price:Number($("vprice").value || 0),
+    unit:$("vunit").value.trim() || "pcs"
+  });
+  if (error) {
+    $("variantMsg").textContent = "Gagal: " + error.message;
+    return;
+  }
+  $("variantMsg").textContent = "Varian berhasil ditambahkan.";
+  $("vname").value = "";
+  $("vprice").value = "";
+  await showDetail(allProducts.find(p => String(p.id) === product_id));
+}
+
+db.auth.onAuthStateChange((_event,session) => {
+  currentUser = session?.user || null;
+});
+
+loadProducts();
 </script>
 </body>
 </html>
