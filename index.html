@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PT BUKASE STORE | Packaging Solutions</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f8f5;
+      color: #202820;
+    }
+
+    header {
+      background: #123b2c;
+      color: white;
+      padding: 22px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 23px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: #d4e8a5;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 14px;
+    }
+
+    .hero {
+      padding: 85px 8%;
+      background: linear-gradient(120deg, #e7eee4, #f7f8f5);
+    }
+
+    .tag {
+      color: #286347;
+      font-weight: bold;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 58px);
+      max-width: 720px;
+      line-height: 1.12;
+      margin: 20px 0;
+    }
+
+    .hero p {
+      color: #606b62;
+      line-height: 1.8;
+      max-width: 570px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 28px;
+      background: #174b35;
+      color: white;
+      text-decoration: none;
+      padding: 15px 24px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .section {
+      padding: 65px 8%;
+    }
+
+    .section h2 {
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      color: #687169;
+      line-height: 1.7;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 22px;
+      margin-top: 30px;
+    }
+
+    .product {
+      background: white;
+      border: 1px solid #e6e9e3;
+      border-radius: 10px;
+      padding: 25px;
+    }
+
+    .product-icon {
+      font-size: 42px;
+      margin-bottom: 18px;
+    }
+
+    .product h3 {
+      margin-bottom: 10px;
+    }
+
+    .product p {
+      color: #687169;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .contact {
+      background: #e9efe6;
+      border-radius: 12px;
+      padding: 35px;
+    }
+
+    footer {
+      background: #123b2c;
+      color: #dce7df;
+      padding: 25px 8%;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 20px 5%;
+      }
+
+      nav a {
+        margin-left: 0;
+        margin-right: 12px;
+      }
+
+      .hero, .section {
+        padding: 48px 5%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">BUKASE <span>STORE</span></div>
+    <nav>
+      <a href="#home">Beranda</a>
+      <a href="#produk">Produk</a>
+      <a href="#tentang">Tentang</a>
+      <a href="#kontak">Kontak</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="tag">PACKAGING SOLUTIONS</div>
+      <h1>Solusi Kemasan untuk Bisnis Anda.</h1>
+      <p>
+        Temukan kebutuhan kemasan untuk usaha makanan,
+        minuman, retail, dan berbagai kebutuhan bisnis.
+        Kami siap membantu Anda menemukan pilihan yang tepat.
+      </p>
+      <a class="btn" href="#produk">Jelajahi Produk &rarr;</a>
+    </section>
+
+    <section class="section" id="produk">
+      <h2>Kategori Produk</h2>
+      <p class="subtitle">
+        Berbagai pilihan kemasan untuk mendukung kebutuhan bisnis Anda.
+      </p>
+
+      <div class="products">
+        <article class="product">
+          <div class="product-icon">📦</div>
+          <h3>Food Packaging</h3>
+          <p>Kemasan makanan untuk restoran, katering, dan usaha kuliner.</p>
+        </article>
+
+        <article class="product">
+          <div class="product-icon">🥣</div>
+          <h3>Paper Bowl</h3>
+          <p>Pilihan wadah untuk makanan berkuah dan berbagai hidangan.</p>
+        </article>
+
+        <article class="product">
+          <div class="product-icon">🛍️</div>
+          <h3>Paper Bag</h3>
+          <p>Kemasan praktis untuk toko, retail, dan kebutuhan promosi.</p>
+        </article>
+
+        <article class="product">
+          <div class="product-icon">🖨️</div>
+          <h3>Custom Printing</h3>
+          <p>Kebutuhan cetak kemasan sesuai desain dan spesifikasi bisnis.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="tentang">
+      <h2>Tentang BUKASE STORE</h2>
+      <p class="subtitle">
+        Kami membangun solusi pengadaan kemasan yang praktis
+        bagi pelaku usaha. Informasi perusahaan, produk,
+        dan layanan dapat dikembangkan sesuai kebutuhan PT.
+      </p>
+    </section>
+
+    <section class="section" id="kontak">
+      <div class="contact">
+        <h2>Butuh Informasi Produk?</h2>
+        <p class="subtitle">
+          Hubungi tim kami untuk menanyakan produk,
+          spesifikasi, dan permintaan penawaran harga.
+        </p>
+        <p style="margin-top: 18px;">
+          Informasi kontak perusahaan akan ditambahkan di tahap berikutnya.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>PT BUKASE STORE</strong>
+    <p>Packaging Solutions for Your Business</p>
+    <p>&copy; 2026 PT BUKASE STORE. Informasi perusahaan perlu diverifikasi sebelum publikasi.</p>
+  </footer>
+
+</body>
+</html>
