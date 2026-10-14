@@ -6,33 +6,232 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BUKASE STORE | Packaging Solutions</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f7f7f5;color:#222}
-header{background:#fff;padding:20px 7%;display:flex;justify-content:space-between;align-items:center;gap:15px;border-bottom:1px solid #eee;flex-wrap:wrap}
-.logo{font-size:23px;font-weight:800}.logo span{color:#b87543}
-button{cursor:pointer;border:0;border-radius:7px;padding:11px 15px;background:#292929;color:white}
-button.secondary{background:#eee;color:#222}
-input,select,textarea{width:100%;padding:11px;margin:6px 0 12px;border:1px solid #ddd;border-radius:7px;font:inherit}
-.hero{padding:65px 7%;background:#e9e1d6}
-.hero small,.tag{color:#9b693e;font-weight:bold;letter-spacing:2px}
-.hero h1{font-size:clamp(32px,5vw,56px);max-width:650px;line-height:1.1}
-.hero p{line-height:1.8;color:#555}
-main{padding:40px 7% 65px}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.card{background:white;border:1px solid #eee;border-radius:12px;overflow:hidden;cursor:pointer}
-.card img{width:100%;height:200px;object-fit:cover;background:#eee}
-.card-body{padding:17px}.card p{font-size:14px;color:#666;line-height:1.6}
-.price{font-size:18px;font-weight:bold;margin-top:12px}
-#back{display:none;margin-bottom:20px}
-.panel{background:white;border:1px solid #ddd;border-radius:12px;padding:20px;margin:20px 0}
-.hidden{display:none!important}
-.row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
-.row button{margin:3px 0}
-footer{background:#252525;color:white;padding:28px 7%}
-.note{font-size:13px;color:#666;line-height:1.6}
-@media(max-width:700px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}main{padding:30px 5%}.hero{padding:45px 5%}.card img{height:145px}.card-body{padding:12px}}
-@media(max-width:420px){.grid{grid-template-columns:1fr}.card img{height:210px}}
-</style>
+:root {
+  --primary: #2563eb;
+  --dark: #0f172a;
+  --muted: #64748b;
+  --bg: #f5f7fb;
+  --white: #ffffff;
+  --border: #e2e8f0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+header {
+  background: var(--white);
+  padding: 18px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 3px 15px #0f172a08;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: center;
+}
+
+nav a {
+  color: var(--dark);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+nav a:hover {
+  color: var(--primary);
+}
+
+.hero {
+  padding: 75px 6%;
+  background: linear-gradient(135deg, #eff6ff, #ffffff);
+  border-bottom: 1px solid var(--border);
+}
+
+.hero h1 {
+  max-width: 750px;
+  font-size: clamp(32px, 5vw, 54px);
+  line-height: 1.15;
+  letter-spacing: -1.5px;
+  margin: 0 0 20px;
+}
+
+.hero p {
+  color: var(--muted);
+  max-width: 650px;
+  font-size: 17px;
+}
+
+section,
+.section {
+  padding: 45px 6%;
+}
+
+h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+p {
+  overflow-wrap: anywhere;
+}
+
+.products,
+.product-list,
+#products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 22px;
+  margin-top: 25px;
+}
+
+.product,
+.card,
+.product-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 5px 20px #0f172a08;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product:hover,
+.card:hover,
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px #0f172a12;
+}
+
+.product img,
+.card img,
+.product-card img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+button,
+.btn,
+a.button {
+  display: inline-block;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 11px 18px;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+button:hover,
+.btn:hover,
+a.button:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 6px 0 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  background: white;
+  color: var(--dark);
+  font: inherit;
+  outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px #2563eb18;
+}
+
+label {
+  font-weight: 600;
+}
+
+#admin,
+.admin,
+.admin-panel,
+#adminPanel,
+#detail,
+.detail {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  margin: 24px 0;
+  box-shadow: 0 5px 20px #0f172a08;
+}
+
+footer {
+  margin-top: 40px;
+  padding: 30px 6%;
+  background: var(--dark);
+  color: white;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  header {
+    padding: 16px 5%;
+  }
+
+  nav {
+    gap: 12px;
+  }
+
+  .hero {
+    padding: 48px 5%;
+  }
+
+  section,
+  .section {
+    padding: 30px 5%;
+  }
+
+  .products,
+  .product-list,
+  #products {
+    grid-template-columns: 1fr;
+  }
+}
+</style> 
 </head>
 <body>
 <header>
