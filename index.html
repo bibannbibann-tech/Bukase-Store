@@ -318,7 +318,10 @@ const money = n => new Intl.NumberFormat("id-ID", {
   style:"currency", currency:"IDR", maximumFractionDigits:0
 }).format(Number(n || 0));
 
+
 function showPage(title, desc) {
+  $("login").classList.add("hidden");
+  $("admin").classList.add("hidden");
   $("title").textContent = title;
   $("desc").textContent = desc || "";
   $("catalog").replaceChildren();
