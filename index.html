@@ -1490,6 +1490,65 @@ button:active {
   }
 }
 
+/* Kartu produk di dashboard admin */
+#adminProducts .admin-product-card {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid #e1e8f1;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 3px 12px rgba(24, 42, 68, .04);
+}
+
+.admin-product-name {
+  display: block;
+  color: #182437;
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.admin-product-category {
+  margin-top: 6px;
+  color: #66758a;
+  font-size: 12px;
+}
+
+.admin-product-price {
+  margin-top: 12px;
+  color: #163b70;
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.admin-product-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.admin-product-actions button {
+  flex: 1;
+  min-width: 0;
+  padding: 10px;
+}
+
+.admin-product-actions .secondary {
+  background: #f0f3f8;
+  color: #33445c;
+  border: 1px solid #dce4ef;
+}
+
+.admin-product-actions .secondary:hover {
+  background: #e3eaf4;
+}
+
+@media (max-width: 480px) {
+  #adminProducts {
+    grid-template-columns: 1fr;
+  }
+}
+
 </style> 
 </head>
 <body>
