@@ -1584,6 +1584,51 @@ button:active {
   transform: scale(.98);
 }
 
+/* Ringkasan dashboard admin */
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 24px 0;
+}
+
+.admin-stat-card {
+  padding: 20px;
+  border: 1px solid #e1e8f1;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #fff, #f3f7fc);
+}
+
+.admin-stat-card span {
+  display: block;
+  color: #66758a;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.admin-stat-card strong {
+  display: block;
+  margin-top: 10px;
+  color: #163b70;
+  font-size: 30px;
+  font-weight: 900;
+}
+
+@media (max-width: 600px) {
+  .admin-stats {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .admin-stat-card {
+    padding: 16px;
+  }
+
+  .admin-stat-card strong {
+    font-size: 25px;
+  }
+}
+
 </style> 
 </head>
 <body>
@@ -1649,6 +1694,22 @@ button:active {
     <h2>Panel Admin</h2>
     <p id="adminMsg" class="note">Login admin berhasil.</p>
     <button class="secondary" onclick="logout()">Keluar</button>
+    
+<div class="admin-stats">
+  <div class="admin-stat-card">
+    <span>Total Produk</span>
+    <strong id="statProducts">0</strong>
+  </div>
+  <div class="admin-stat-card">
+    <span>Total Stok</span>
+    <strong id="statStock">0</strong>
+  </div>
+  <div class="admin-stat-card">
+    <span>Total Kategori</span>
+    <strong id="statCategories">0</strong>
+  </div>
+</div>
+
     <hr>
     <h3 id="formTitle">Tambah Produk</h3>
     <input id="pid" type="hidden">
@@ -1998,8 +2059,19 @@ function renderAdminProducts() {
   $("adminProducts").replaceChildren();
   $("variantProduct").replaceChildren();
 
-  visibleProducts().forEach(p => {
-    const line = document.createElement("div");
+const products = visibleProducts();
+
+$("statProducts").textContent = products.length;
+$("statStock").textContent = products.reduce(
+  (total, p) => total + (Number(p.stock) || 0),
+  0
+);
+$("statCategories").textContent = new Set(
+  products.map(p => (p.category || "").trim()).filter(Boolean)
+).size;
+
+products.forEach(p => { 
+  const line = document.createElement("div");
     line.className = "panel";
     const name = document.createElement("strong");
     name.textContent = p.name + " — " + money(p.price);
