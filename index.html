@@ -1087,16 +1087,74 @@ footer .footer-copy {
   }
 }
 
+/* Header marketplace */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 5%;
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom: 1px solid #e3e9f1;
+  box-shadow: 0 4px 18px rgba(20, 40, 70, 0.06);
+}
+
+.logo {
+  color: #102c53;
+  font-size: 23px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
+
+.logo span {
+  color: #3979b8;
+}
+
+header .row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+header button {
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 12px 14px;
+    gap: 8px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  header .row {
+    gap: 6px;
+  }
+
+  header button {
+    padding: 9px 10px;
+    font-size: 12px;
+  }
+}
+
 </style> 
 </head>
 <body>
+
 <header>
   <div class="logo">BUKASE <span>STORE</span></div>
   <div class="row">
-  <button class="secondary" onclick="home()">Beranda</button>
-  <button onclick="openLogin()">Login Admin</button>
-</div>
+    <button class="secondary" onclick="home()">Beranda</button>
+    <button onclick="openLogin()">Login Admin</button>
+  </div>
 </header>
+
 
 
 <section class="hero">
