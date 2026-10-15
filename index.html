@@ -943,18 +943,26 @@ async function showDetail(p) {
   });
 }
 
+
 async function loadProducts() {
   $("status").textContent = "Memuat produk...";
-  const {data,error} = await db.from("products").select("*").order("id");
-  if (error) {
-    $("status").textContent = "Gagal memuat produk. Periksa Publishable key dan akses tabel.";
-    console.error(error);
-    return;
+  try {
+    const { data, error } = await db
+      .from("products")
+      .select("*")
+      .order("id");
+
+    if (error) throw error;
+
+    allProducts = data || [];
+    $("status").textContent = "";
+    home();
+  } catch (error) {
+    console.error("BUKASE STORE:", error);
+    $("status").textContent = "Gagal koneksi: " + error.message;
   }
-  allProducts = data || [];
-  $("status").textContent = "";
-  home();
 }
+
 
 function openLogin() {
   $("login").classList.remove("hidden");
