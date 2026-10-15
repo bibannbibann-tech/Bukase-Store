@@ -1044,6 +1044,49 @@ main #desc {
   }
 }
 
+/* Footer premium */
+footer {
+  margin-top: 60px;
+  padding: 38px 20px 24px;
+  background: #102c53;
+  color: #fff;
+  text-align: center;
+  border-radius: 20px 20px 0 0;
+}
+
+footer strong {
+  display: block;
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+footer p {
+  color: #d5e3f6;
+  line-height: 1.7;
+  margin: 8px 0;
+}
+
+.footer-line {
+  width: 60px;
+  height: 3px;
+  margin: 20px auto;
+  border-radius: 5px;
+  background: #70a9e8;
+}
+
+footer .footer-copy {
+  font-size: 12px;
+  color: #b9cce5;
+}
+
+@media (max-width: 600px) {
+  footer {
+    margin-top: 38px;
+    padding: 30px 16px 20px;
+  }
+}
+
 </style> 
 </head>
 <body>
@@ -1134,10 +1177,19 @@ main #desc {
   </section>
 </main>
 
+  
 <footer>
   <strong>BUKASE STORE</strong>
   <p>Packaging Solutions for Your Business</p>
+  <div class="footer-line"></div>
+  <p class="footer-copy">
+    Solusi kemasan untuk mendukung perkembangan bisnis Anda.
+  </p>
+  <p class="footer-copy">
+    © 2026 BUKASE STORE. All rights reserved.
+  </p>
 </footer>
+
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
