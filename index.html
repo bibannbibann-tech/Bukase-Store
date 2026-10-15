@@ -761,27 +761,7 @@ function showPage(title, desc) {
   $("back").style.display = "inline-block";
 }
 
-function makeCard(p, action) {
-  const card = document.createElement("article");
-  card.className = "card";
-  const img = document.createElement("img");
-  img.src = p.image_url || "";
-  img.alt = p.name;
-  img.onerror = () => img.style.display = "none";
 
-  const body = document.createElement("div");
-  body.className = "card-body";
-  const tag = document.createElement("div");
-  tag.className = "tag";
-  tag.textContent = p.category || "Produk";
-
-  const h = document.createElement("h3");
-  h.textContent = p.name;
-  const d = document.createElement("p");
-  d.textContent = p.description || "Hubungi kami untuk informasi produk.";
-  const price = document.createElement("div");
-  price.className = "price";
-  price.textContent = money(p.price);
 
 
 
