@@ -258,6 +258,300 @@ footer {
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
 }
 
+/* BUKASE STORE — PREMIUM CORPORATE REDESIGN */
+:root {
+  --navy: #102344;
+  --navy-deep: #09172e;
+  --blue: #2563eb;
+  --blue-light: #eff6ff;
+  --text: #17243b;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --surface: #ffffff;
+  --page: #f5f8fc;
+}
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--text);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  line-height: 1.6;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px clamp(18px, 5vw, 76px);
+  background: rgba(255,255,255,.96);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 4px 20px rgba(16,35,68,.05);
+}
+
+.logo {
+  color: var(--navy);
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.logo span {
+  color: var(--blue);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(52px, 8vw, 100px) clamp(22px, 8vw, 110px);
+  background: linear-gradient(125deg, var(--navy-deep), #153d76 72%, #2563eb);
+  color: #fff;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  right: -90px;
+  top: -120px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 50%;
+  box-shadow: 0 0 0 45px rgba(255,255,255,.035),
+              0 0 0 90px rgba(255,255,255,.025);
+  pointer-events: none;
+}
+
+.hero small {
+  display: inline-block;
+  color: #bfdbfe;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+.hero h1 {
+  max-width: 760px;
+  margin: 14px 0;
+  color: #fff;
+  font-size: clamp(34px, 5vw, 58px);
+  font-weight: 850;
+  line-height: 1.12;
+  letter-spacing: -1.5px;
+}
+
+.hero p {
+  max-width: 610px;
+  color: #dbeafe;
+  font-size: clamp(15px, 2vw, 18px);
+}
+
+main {
+  width: min(1200px, 90%);
+  margin: 42px auto 80px;
+}
+
+#title {
+  margin: 26px 0 5px;
+  color: var(--navy);
+  font-size: clamp(25px, 3vw, 34px);
+  font-weight: 800;
+  letter-spacing: -.6px;
+}
+
+#desc {
+  margin-top: 4px;
+  color: var(--muted);
+}
+
+.search-box {
+  margin: 24px 0;
+}
+
+.search-box input {
+  min-height: 54px;
+  padding: 15px 20px;
+  border: 1px solid #d7e1ef;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 5px 18px rgba(16,35,68,.04);
+}
+
+.search-box input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 4px rgba(37,99,235,.1);
+}
+
+.grid,
+.products,
+.product-list,
+#products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+  gap: 22px;
+}
+
+.card,
+.panel {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface);
+  box-shadow: 0 5px 22px rgba(16,35,68,.045);
+  transition: transform .2s ease, box-shadow .2s ease,
+              border-color .2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: #bfd3f5;
+  box-shadow: 0 16px 35px rgba(16,35,68,.10);
+}
+
+.card-body {
+  padding: 22px;
+}
+
+.card h3,
+.card-body h3 {
+  margin-top: 0;
+  color: var(--navy);
+  font-size: 19px;
+  font-weight: 750;
+}
+
+.card p {
+  color: var(--muted);
+}
+
+button {
+  min-height: 43px;
+  padding: 11px 18px;
+  border: 1px solid var(--blue);
+  border-radius: 10px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  background: #1d4ed8;
+}
+
+button.secondary {
+  border-color: #d6e0ee;
+  background: #fff;
+  color: var(--navy);
+}
+
+button.secondary:hover {
+  background: var(--blue-light);
+  border-color: #b8cdf5;
+}
+
+input,
+textarea,
+select {
+  max-width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #d7e1ef;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font: inherit;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid rgba(37,99,235,.18);
+  border-color: var(--blue);
+}
+
+label {
+  display: block;
+  margin: 12px 0 5px;
+  color: var(--navy);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.note {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 600px) {
+  header {
+    padding: 14px 16px;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  header .row {
+    width: 100%;
+  }
+
+  header .row button {
+    flex: 1;
+  }
+
+  .hero {
+    padding: 48px 22px;
+  }
+
+  main {
+    width: calc(100% - 30px);
+    margin-top: 25px;
+  }
+
+  .grid,
+  .products,
+  .product-list,
+  #products {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .card-body {
+    padding: 15px;
+  }
+
+  .card button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .grid,
+  .products,
+  .product-list,
+  #products {
+    grid-template-columns: 1fr;
+  }
+}
+
 </style> 
 </head>
 <body>
