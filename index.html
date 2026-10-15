@@ -234,6 +234,30 @@ footer {
 .hidden {
   display: none !important;
 }
+  
+.search-box {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.search-box input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px 18px;
+  border: 1px solid #d8e0eb;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #172554;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-box input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
 </style> 
 </head>
 <body>
@@ -255,6 +279,16 @@ footer {
   <button id="back" class="secondary" onclick="home()">← Kembali</button>
   <h2 id="title">Katalog Produk</h2>
   <p id="desc">Pilih produk untuk melihat detail, ukuran, dan harga.</p>
+  
+<div class="search-box">
+  <input
+    id="productSearch"
+    type="search"
+    placeholder="Cari nama produk atau kemasan..."
+    oninput="searchProducts()"
+  >
+</div>
+
   <p id="status" class="note">Menghubungkan ke database...</p>
   <div id="catalog" class="grid"></div>
 
@@ -402,6 +436,27 @@ function showCategory(category) {
   visibleProducts().filter(p => (p.category || "Lainnya") === category)
     .forEach(p => $("catalog").append(makeCard(p, () => showDetail(p))));
 }
+  
+function searchProducts() {
+  const query = $("productSearch").value.trim().toLowerCase();
+  showPage("Hasil Pencarian", "Produk yang cocok dengan pencarianmu.");
+
+  const results = visibleProducts().filter(p =>
+    (p.name || "").toLowerCase().includes(query) ||
+    (p.category || "").toLowerCase().includes(query)
+  );
+
+  if (!results.length) {
+    $("status").textContent = "Produk tidak ditemukan.";
+    return;
+  }
+
+  $("status").textContent = "";
+  results.forEach(p =>
+    $("catalog").append(makeCard(p, () => showDetail(p)))
+  );
+}
+
 
 async function showDetail(p) {
   showPage(p.name, p.description || "Detail produk");
