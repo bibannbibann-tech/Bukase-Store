@@ -1007,6 +1007,43 @@ main #desc {
   }
 }
 
+/* Tombol WhatsApp produk */
+#catalog .product-wa-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 44px;
+  margin-top: 16px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #12804a;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background .2s ease, transform .2s ease;
+}
+
+#catalog .product-wa-btn:hover {
+  background: #0c6539;
+  transform: translateY(-1px);
+}
+
+#catalog .product-wa-btn:focus-visible {
+  outline: 3px solid #9de2bb;
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  #catalog .product-wa-btn {
+    min-height: 40px;
+    padding: 9px 6px;
+    font-size: 11px;
+  }
+}
+
 </style> 
 </head>
 <body>
