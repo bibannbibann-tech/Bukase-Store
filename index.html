@@ -1385,6 +1385,111 @@ button:active {
   }
 }
 
+/* Dashboard Admin BUKASE STORE */
+#admin {
+  margin: 28px auto;
+  padding: 28px;
+  border: 1px solid #e1e8f1;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(24, 42, 68, .06);
+}
+
+#admin h2 {
+  margin: 0 0 8px;
+  color: #102c53;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+#admin h3 {
+  margin-top: 26px;
+  margin-bottom: 16px;
+  color: #163b70;
+  font-size: 18px;
+}
+
+#admin label {
+  display: block;
+  margin: 15px 0 7px;
+  color: #33445c;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+#admin input:not([type="hidden"]),
+#admin select,
+#admin textarea {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  box-sizing: border-box;
+  padding: 11px 13px;
+  border: 1px solid #d8e1ec;
+  border-radius: 10px;
+  background: #fff;
+  font: inherit;
+}
+
+#admin textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+#admin input:focus,
+#admin select:focus,
+#admin textarea:focus {
+  outline: 3px solid #e7f0fc;
+  border-color: #3979b8;
+}
+
+#admin hr {
+  margin: 26px 0;
+  border: 0;
+  border-top: 1px solid #e5ebf3;
+}
+
+#admin .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+#admin .row button {
+  flex: 1;
+}
+
+#admin #adminProducts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+#admin .note {
+  color: #66758a;
+  line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+  #admin {
+    padding: 19px 15px;
+    border-radius: 16px;
+  }
+
+  #admin h2 {
+    font-size: 24px;
+  }
+
+  #admin .row {
+    flex-direction: column;
+  }
+
+  #admin .row button {
+    width: 100%;
+  }
+}
+
 </style> 
 </head>
 <body>
