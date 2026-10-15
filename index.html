@@ -653,6 +653,156 @@ label {
   color: #14532d;
 }
 
+/* BUKASE STORE — Modern Marketplace */
+:root {
+  --market-primary: #163b70;
+  --market-primary-dark: #102c53;
+  --market-bg: #f4f7fb;
+  --market-surface: #ffffff;
+  --market-text: #182437;
+  --market-muted: #66758a;
+  --market-border: #e3e9f1;
+  --market-radius: 16px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--market-bg);
+  color: var(--market-text);
+}
+
+header {
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid var(--market-border);
+  box-shadow: 0 3px 16px rgba(20, 40, 70, 0.04);
+}
+
+button {
+  border: 0;
+  border-radius: 10px;
+  padding: 11px 16px;
+  background: var(--market-primary);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease;
+}
+
+button:hover {
+  background: var(--market-primary-dark);
+}
+
+.card {
+  overflow: hidden;
+  background: var(--market-surface);
+  border: 1px solid var(--market-border);
+  border-radius: var(--market-radius);
+  box-shadow: 0 4px 14px rgba(24, 42, 68, 0.045);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(24, 42, 68, 0.10);
+}
+
+.card img {
+  display: block;
+  width: 100%;
+  object-fit: contain;
+  background: #fff;
+}
+
+.card-body {
+  padding: 18px;
+}
+
+.card h3 {
+  color: var(--market-text);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.card p {
+  color: var(--market-muted);
+  line-height: 1.7;
+}
+
+.price {
+  color: var(--market-primary);
+  font-size: 19px;
+  font-weight: 800;
+  margin-top: 12px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #eaf1fb;
+  color: var(--market-primary);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.search-box input,
+input,
+select,
+textarea {
+  border: 1px solid #d8e1ec;
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: #fff;
+  color: var(--market-text);
+}
+
+.search-box input:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #b7d2f7;
+  border-color: var(--market-primary);
+}
+
+.panel {
+  background: #fff;
+  border: 1px solid var(--market-border);
+  border-radius: var(--market-radius);
+  box-shadow: 0 4px 16px rgba(24, 42, 68, 0.04);
+}
+
+.product-wa-btn {
+  width: 100%;
+  margin-top: 12px;
+  background: #12804a;
+  color: #fff;
+}
+
+.product-wa-btn:hover {
+  background: #0c6539;
+}
+
+@media (max-width: 600px) {
+  .card-body {
+    padding: 13px;
+  }
+
+  .card h3 {
+    font-size: 15px;
+  }
+
+  .price {
+    font-size: 17px;
+  }
+
+  button {
+    min-height: 42px;
+  }
+}
+
 </style> 
 </head>
 <body>
