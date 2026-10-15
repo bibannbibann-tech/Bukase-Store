@@ -803,6 +803,87 @@ textarea:focus {
   }
 }
 
+/* Hero marketplace upgrade */
+.hero {
+  margin: 24px auto;
+  padding: 48px 32px;
+  max-width: 1200px;
+  border-radius: 24px;
+  background: linear-gradient(125deg, #102c53 0%, #1d4e89 65%, #3979b8 100%);
+  color: #fff;
+  box-shadow: 0 18px 40px rgba(16, 44, 83, .18);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero small {
+  display: inline-block;
+  color: #d8e8ff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.hero h1 {
+  max-width: 720px;
+  font-size: clamp(30px, 4.5vw, 48px);
+  line-height: 1.15;
+  letter-spacing: -1px;
+  margin: 8px 0 16px;
+  color: #fff;
+}
+
+.hero p {
+  max-width: 600px;
+  color: #e5efff;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.hero button {
+  margin-top: 14px;
+  background: #fff;
+  color: #163b70;
+  border-radius: 10px;
+  padding: 13px 20px;
+}
+
+.hero button:hover {
+  background: #eaf1fb;
+}
+
+.hero-benefits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin-top: 26px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .hero {
+    margin: 16px 0;
+    padding: 30px 20px;
+    border-radius: 18px;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+
+  .hero-benefits {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
 </style> 
 </head>
 <body>
