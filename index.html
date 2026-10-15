@@ -1229,6 +1229,55 @@ button:active {
   }
 }
 
+/* Kartu pilihan ukuran */
+.detail-base-price {
+  margin: 18px 0;
+  padding: 18px;
+  border-radius: 14px;
+  background: #eaf2fc;
+  color: #163b70;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.detail-variants {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.detail-variant-card {
+  padding: 18px;
+  border: 1px solid #dfe8f3;
+  border-radius: 14px;
+  background: #fff;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.detail-variant-card:hover {
+  border-color: #3979b8;
+  box-shadow: 0 6px 18px rgba(24, 42, 68, .08);
+}
+
+.detail-variant-card strong {
+  display: block;
+  color: #182437;
+  font-size: 15px;
+}
+
+.detail-variant-price {
+  margin: 12px 0 6px;
+  color: #163b70;
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.detail-variant-card span {
+  color: #66758a;
+  font-size: 13px;
+}
+
 </style> 
 </head>
 <body>
