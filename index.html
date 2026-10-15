@@ -1549,6 +1549,41 @@ button:active {
   }
 }
 
+/* Tombol aksi dashboard admin */
+#admin button:not(.secondary) {
+  background: #163b70;
+  color: #fff;
+  font-weight: 700;
+}
+
+#admin button:not(.secondary):hover {
+  background: #102c53;
+}
+
+#admin button.secondary {
+  background: #f0f3f8;
+  color: #33445c;
+  border: 1px solid #dce4ef;
+}
+
+#admin button.secondary:hover {
+  background: #e3eaf4;
+}
+
+#admin > button.secondary {
+  width: auto;
+  min-width: 100px;
+  margin: 8px 0 12px;
+}
+
+#admin button {
+  transition: background .2s ease, transform .2s ease;
+}
+
+#admin button:active {
+  transform: scale(.98);
+}
+
 </style> 
 </head>
 <body>
