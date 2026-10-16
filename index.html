@@ -2377,9 +2377,11 @@ if (id) {
   oldStock = Number(oldProduct.stock) || 0;
 }
 
+
 const result = id
-  ? await db.from("products").update(record).eq("id", id)
-  : await db.from("products").insert(record).select("id").single();
+  ? await db.from("products").update(record).eq("id", id).select("id, stock").single()
+  : await db.from("products").insert(record).select("id, stock").single();
+
 
 if (result.error) {
   return alert("Gagal menyimpan: " + result.error.message);
