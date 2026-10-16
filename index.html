@@ -1841,6 +1841,88 @@ footer {
   box-shadow: 0 14px 30px #17452e18 !important;
 }
 
+/* KARTU PRODUK DENGAN FOTO */
+#catalog .product-card {
+  padding: 0 !important;
+  overflow: hidden;
+  background: #ffffff !important;
+  border-radius: 18px !important;
+}
+
+#catalog .product-image {
+  height: 220px;
+  background: #f1f6ec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#catalog .product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 12px;
+  transition: transform .25s ease;
+}
+
+#catalog .product-card:hover .product-image img {
+  transform: scale(1.05);
+}
+
+#catalog .product-image.no-image {
+  padding: 20px;
+  text-align: center;
+  color: #647568;
+  font-size: 13px;
+}
+
+#catalog .product-card .card-body {
+  padding: 18px !important;
+}
+
+#catalog .product-card .tag {
+  color: #28623b;
+  background: #eaf4e4;
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+#catalog .product-card h3 {
+  margin: 12px 0 8px;
+  color: #17452e !important;
+  font-size: 19px !important;
+}
+
+#catalog .product-card .price {
+  color: #24663b !important;
+  font-size: 22px !important;
+  font-weight: 800;
+  margin-top: 4px;
+}
+
+#catalog .product-detail-btn {
+  width: 100%;
+  margin-top: 14px;
+  background: #17452e !important;
+  color: white !important;
+  border-radius: 10px !important;
+  padding: 12px !important;
+}
+
+@media (max-width: 600px) {
+  #catalog .product-image {
+    height: 165px;
+  }
+
+  #catalog .product-card .card-body {
+    padding: 12px !important;
+  }
+}
+
 </style> 
 </head>
 <body>
@@ -2001,54 +2083,64 @@ function showPage(title, desc) {
 
 
 
+
 function makeCard(p, action) {
   const card = document.createElement("article");
-  card.className = "card";
+  card.className = "card product-card";
+
+  const imageBox = document.createElement("div");
+  imageBox.className = "product-image";
 
   const img = document.createElement("img");
   img.src = p.image_url || "";
   img.alt = p.name || "Produk BUKASE STORE";
-  img.onerror = () => img.style.display = "none";
+  img.loading = "lazy";
+
+  img.onerror = () => {
+    img.style.display = "none";
+    imageBox.classList.add("no-image");
+    imageBox.textContent = "Foto produk segera tersedia";
+  };
+
+  if (!p.image_url) {
+    imageBox.classList.add("no-image");
+    imageBox.textContent = "Foto produk segera tersedia";
+  } else {
+    imageBox.append(img);
+  }
 
   const body = document.createElement("div");
   body.className = "card-body";
 
   const tag = document.createElement("div");
   tag.className = "tag";
-  tag.textContent = p.category || "Produk";
+  tag.textContent = p.category || "Packaging";
 
   const h = document.createElement("h3");
   h.textContent = p.name || "Produk";
 
   const d = document.createElement("p");
-  d.textContent = p.description || "Hubungi kami untuk informasi produk.";
+  d.textContent = p.description || "Kemasan berkualitas untuk kebutuhan bisnis Anda.";
+
+  const priceLabel = document.createElement("small");
+  priceLabel.textContent = "Harga mulai dari";
 
   const price = document.createElement("div");
   price.className = "price";
   price.textContent = money(p.price);
 
-  const wa = document.createElement("button");
-  wa.type = "button";
-  wa.className = "product-wa-btn";
-  wa.textContent = "Pesan via WhatsApp";
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "product-detail-btn";
+  btn.textContent = "Lihat Detail →";
 
-  wa.onclick = (event) => {
+  btn.onclick = (event) => {
     event.stopPropagation();
-    const message =
-      "Halo BUKASE STORE, saya ingin bertanya tentang produk: " +
-      (p.name || "") +
-      ". Mohon informasi harga dan ketersediaannya.";
-
-    window.open(
-      "https://wa.me/6285710908665?text=" +
-        encodeURIComponent(message),
-      "_blank",
-      "noopener,noreferrer"
-    );
+    action();
   };
 
-  body.append(tag, h, d, price, wa);
-  card.append(img, body);
+  body.append(tag, h, d, priceLabel, price, btn);
+  card.append(imageBox, body);
   card.onclick = action;
 
   return card;
