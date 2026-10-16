@@ -2342,10 +2342,28 @@ function editProduct(p) {
 }
 
 async function saveProduct() {
-  if (!isAdmin) return alert("Silakan login admin.");
-  const name = $("pname").value.trim();
-  const category = $("pcat").value.trim();
-  if (!name || !category) return alert("Nama dan kategori wajib diisi.");
+    const saveButton = document.querySelector('button[onclick="saveProduct()"]');
+  if (saveButton?.disabled) return;
+  if (saveButton) {
+    saveButton.disabled = true;
+    saveButton.textContent = "Menyimpan...";
+  }
+ if (!isAdmin) {
+  alert("Silakan login admin.");
+  saveButton.disabled = false;
+  saveButton.textContent = "Simpan Produk";
+  return;
+}
+
+const name = $("pname").value.trim();
+const category = $("pcat").value.trim();
+
+if (!name || !category) {
+  alert("Nama dan kategori wajib diisi.");
+  saveButton.disabled = false;
+  saveButton.textContent = "Simpan Produk";
+  return;
+}
 
   const record = {
     name, category,
@@ -2365,10 +2383,12 @@ if (id) {
     .select("id, name, stock")
     .eq("id", id)
     .single();
-
-  if (oldError) {
-    return alert("Gagal membaca stok lama: " + oldError.message);
-  }
+if (oldError) {
+  alert("Gagal membaca stok lama: " + oldError.message);
+  saveButton.disabled = false;
+  saveButton.textContent = "Simpan Produk";
+  return;
+}
 
   oldStock = Number(oldProduct.stock) || 0;
 }
@@ -2380,9 +2400,11 @@ const result = id
 
 
 if (result.error) {
-  return alert("Gagal menyimpan: " + result.error.message);
+  alert("Gagal menyimpan: " + result.error.message);
+  saveButton.disabled = false;
+  saveButton.textContent = "Simpan Produk";
+  return;
 }
-
 if (!id) {
   savedProductId = result.data.id;
   oldStock = 0;
@@ -2392,6 +2414,7 @@ if (!id) {
 if (oldStock !== Number(record.stock)) {
   const difference = Number(record.stock) - Number(oldStock || 0);
 
+  
   const { error: historyError } = await db
     .from("product_stock_history")
     .insert({
@@ -2413,8 +2436,11 @@ if (oldStock !== Number(record.stock)) {
   clearForm();
   await loadProducts();
   renderAdminProducts();
-  await loadStockHistory();
+    await loadStockHistory();
+  saveButton.disabled = false;
+  saveButton.textContent = "Simpan Produk";
 }
+
 
 
 
