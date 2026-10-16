@@ -2067,12 +2067,55 @@ async function saveProduct() {
     image_url:$("pimage").value.trim() || null,
     description:$("pdesc").value.trim() || null
   };
-  const id = $("pid").value;
-  const result = id
-    ? await db.from("products").update(record).eq("id",id)
-    : await db.from("products").insert(record);
+ 
+const id = $("pid").value;
+let oldStock = null;
+let savedProductId = id;
 
-  if (result.error) return alert("Gagal menyimpan: " + result.error.message);
+if (id) {
+  const { data: oldProduct, error: oldError } = await db
+    .from("products")
+    .select("id, name, stock")
+    .eq("id", id)
+    .single();
+
+  if (oldError) {
+    return alert("Gagal membaca stok lama: " + oldError.message);
+  }
+
+  oldStock = Number(oldProduct.stock) || 0;
+}
+
+const result = id
+  ? await db.from("products").update(record).eq("id", id)
+  : await db.from("products").insert(record).select("id").single();
+
+if (result.error) {
+  return alert("Gagal menyimpan: " + result.error.message);
+}
+
+if (!id) {
+  savedProductId = result.data.id;
+  oldStock = 0;
+}
+
+if (oldStock !== Number(record.stock)) {
+  const { error: historyError } = await db
+    .from("stock_history")
+    .insert({
+      product_id: savedProductId,
+      product_name: name,
+      old_stock: oldStock,
+      new_stock: Number(record.stock)
+    });
+
+  if (historyError) {
+    alert("Produk tersimpan, tetapi riwayat stok gagal: " + historyError.message);
+  }
+}
+
+
+
   alert("Produk berhasil disimpan.");
   clearForm();
   await loadProducts();
