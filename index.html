@@ -2417,6 +2417,7 @@ if (oldStock !== Number(record.stock)) {
 }
 
 
+
 async function loadStockHistory() {
   const box = $("stockHistory");
   if (!box) return;
@@ -2443,9 +2444,25 @@ async function loadStockHistory() {
     return;
   }
 
-  summary.textContent = data.length + " riwayat ditemukan";
+  // Sembunyikan catatan identik yang tersimpan berulang.
+  const seen = new Set();
+  const uniqueData = data.filter(item => {
+    const key = [
+      item.product_id,
+      item.movement_type,
+      item.quantity,
+      item.note,
+      item.created_at
+    ].join("|");
 
-  data.forEach(item => {
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
+  summary.textContent = uniqueData.length + " riwayat ditampilkan";
+
+  uniqueData.forEach(item => {
     const row = document.createElement("article");
     row.className = "stock-history-card";
 
@@ -2453,7 +2470,9 @@ async function loadStockHistory() {
     const product = allProducts.find(
       p => String(p.id) === String(item.product_id)
     );
-    name.textContent = product ? product.name : "Produk ID " + item.product_id;
+    name.textContent = product
+      ? product.name
+      : "Produk ID " + item.product_id;
 
     const change = document.createElement("div");
     change.className = "stock-history-change";
@@ -2468,7 +2487,6 @@ async function loadStockHistory() {
     box.append(row);
   });
 }
-
 
 async function deleteProduct(p) {
   if (!isAdmin || !confirm('Hapus produk "' + p.name + '"?')) return;
