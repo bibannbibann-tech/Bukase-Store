@@ -2036,6 +2036,16 @@ footer {
     <label>Satuan</label><input id="vunit" value="pcs" placeholder="pcs / roll">
     <button onclick="saveVariant()">Tambah Varian</button>
     <div id="variantMsg" class="note"></div>
+
+<div class="admin-stock-history">
+  <h3>Riwayat Stok</h3>
+  <p class="note">Catatan perubahan stok produk.</p>
+  <button type="button" class="secondary" onclick="loadStockHistory()">
+    Muat Ulang Riwayat
+  </button>
+  <div id="stockHistory">Belum ada riwayat stok.</div>
+</div>
+ 
   </section>
 </main>
 
@@ -2380,20 +2390,24 @@ if (!id) {
   oldStock = 0;
 }
 
+
 if (oldStock !== Number(record.stock)) {
+  const difference = Number(record.stock) - Number(oldStock || 0);
+
   const { error: historyError } = await db
-    .from("stock_history")
+    .from("product_stock_history")
     .insert({
       product_id: savedProductId,
-      product_name: name,
-      old_stock: oldStock,
-      new_stock: Number(record.stock)
+      movement_type: difference > 0 ? "masuk" : "keluar",
+      quantity: Math.abs(difference),
+      note: "Perubahan stok produk: " + name
     });
 
   if (historyError) {
     alert("Produk tersimpan, tetapi riwayat stok gagal: " + historyError.message);
   }
 }
+
 
 
 
