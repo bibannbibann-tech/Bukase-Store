@@ -2028,9 +2028,11 @@ async function login() {
   $("login").classList.add("hidden");
   $("admin").classList.remove("hidden");
   $("adminMsg").textContent = "Login sebagai " + currentUser.email;
-  await loadProducts();
+   await loadProducts();
   renderAdminProducts();
+  await loadStockHistory();
   $("admin").scrollIntoView({behavior:"smooth"});
+}
 }
 
 async function logout() {
