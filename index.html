@@ -2129,9 +2129,28 @@ if (oldStock !== Number(record.stock)) {
   renderAdminProducts();
   await loadStockHistory();
 }
+
 async function loadStockHistory() {
   const box = $("stockHistory");
-  box.textContent = "Memuat riwayat stok...";
+  box.replaceChildren();
+
+  const tools = document.createElement("div");
+  tools.className = "stock-history-tools";
+
+  const search = document.createElement("input");
+  search.type = "search";
+  search.placeholder = "Cari nama produk...";
+  search.setAttribute("aria-label", "Cari riwayat stok berdasarkan nama produk");
+
+  const summary = document.createElement("p");
+  summary.className = "stock-history-summary";
+  summary.textContent = "Memuat riwayat stok...";
+
+  const list = document.createElement("div");
+  list.className = "stock-history-list";
+
+  tools.append(search);
+  box.append(tools, summary, list);
 
   const { data, error } = await db
     .from("stock_history")
@@ -2140,35 +2159,57 @@ async function loadStockHistory() {
     .limit(50);
 
   if (error) {
-    box.textContent = "Gagal memuat riwayat: " + error.message;
+    summary.textContent = "Gagal memuat riwayat: " + error.message;
     return;
   }
-
-  box.replaceChildren();
 
   if (!data || data.length === 0) {
-    box.textContent = "Belum ada riwayat perubahan stok.";
+    summary.textContent = "Belum ada riwayat perubahan stok.";
     return;
   }
 
-  data.forEach(item => {
-    const row = document.createElement("div");
-    row.className = "panel";
+  function renderHistory() {
+    list.replaceChildren();
 
-    const name = document.createElement("strong");
-    name.textContent = item.product_name || "Produk";
+    const keyword = search.value.trim().toLowerCase();
+    const filtered = data.filter(item =>
+      (item.product_name || "").toLowerCase().includes(keyword)
+    );
 
-    const detail = document.createElement("p");
-    detail.textContent =
-      "Stok: " + item.old_stock + " → " + item.new_stock;
+    summary.textContent =
+      filtered.length + " riwayat ditemukan";
 
-    const date = document.createElement("small");
-    date.textContent = new Date(item.changed_at).toLocaleString("id-ID");
+    if (filtered.length === 0) {
+      list.textContent = "Produk tidak ditemukan.";
+      return;
+    }
 
-    row.append(name, detail, date);
-    box.append(row);
-  });
+    filtered.forEach(item => {
+      const row = document.createElement("article");
+      row.className = "stock-history-card";
+
+      const name = document.createElement("strong");
+      name.textContent = item.product_name || "Produk";
+
+      const change = document.createElement("div");
+      change.className = "stock-history-change";
+      change.textContent =
+        item.old_stock + " → " + item.new_stock;
+
+      const label = document.createElement("small");
+      label.textContent =
+        "Perubahan stok · " +
+        new Date(item.changed_at).toLocaleString("id-ID");
+
+      row.append(name, change, label);
+      list.append(row);
+    });
+  }
+
+  search.addEventListener("input", renderHistory);
+  renderHistory();
 }
+
 async function deleteProduct(p) {
   if (!isAdmin || !confirm('Hapus produk "' + p.name + '"?')) return;
   const {error} = await db.from("products").delete().eq("id",p.id);
