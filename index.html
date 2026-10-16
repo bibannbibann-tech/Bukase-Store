@@ -1760,6 +1760,11 @@ button:active {
     <h3>Produk Tersimpan</h3>
     <div id="adminProducts"></div>
     <hr>
+    <hr>
+<h3>Riwayat Perubahan Stok</h3>
+<div id="stockHistory" class="stock-history">
+  Memuat riwayat stok...
+</div>
     <h3>Tambah Ukuran / Varian</h3>
     <label>Pilih produk</label><select id="variantProduct"></select>
     <label>Nama ukuran atau varian</label><input id="vname" placeholder="Contoh: Ukuran 20 x 20 cm">
@@ -2120,14 +2125,55 @@ if (oldStock !== Number(record.stock)) {
   clearForm();
   await loadProducts();
   renderAdminProducts();
+  await loadStockHistory();
 }
+async function loadStockHistory() {
+  const box = $("stockHistory");
+  box.textContent = "Memuat riwayat stok...";
 
+  const { data, error } = await db
+    .from("stock_history")
+    .select("*")
+    .order("changed_at", { ascending: false })
+    .limit(50);
+
+  if (error) {
+    box.textContent = "Gagal memuat riwayat: " + error.message;
+    return;
+  }
+
+  box.replaceChildren();
+
+  if (!data || data.length === 0) {
+    box.textContent = "Belum ada riwayat perubahan stok.";
+    return;
+  }
+
+  data.forEach(item => {
+    const row = document.createElement("div");
+    row.className = "panel";
+
+    const name = document.createElement("strong");
+    name.textContent = item.product_name || "Produk";
+
+    const detail = document.createElement("p");
+    detail.textContent =
+      "Stok: " + item.old_stock + " → " + item.new_stock;
+
+    const date = document.createElement("small");
+    date.textContent = new Date(item.changed_at).toLocaleString("id-ID");
+
+    row.append(name, detail, date);
+    box.append(row);
+  });
+}
 async function deleteProduct(p) {
   if (!isAdmin || !confirm('Hapus produk "' + p.name + '"?')) return;
   const {error} = await db.from("products").delete().eq("id",p.id);
   if (error) return alert("Gagal menghapus: " + error.message);
   await loadProducts();
   renderAdminProducts();
+  await loadStockHistory();
 }
 
 function renderAdminProducts() {
