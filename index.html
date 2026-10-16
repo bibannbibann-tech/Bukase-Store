@@ -2033,7 +2033,7 @@ async function login() {
   await loadStockHistory();
   $("admin").scrollIntoView({behavior:"smooth"});
 }
-}
+
 
 async function logout() {
   await db.auth.signOut();
