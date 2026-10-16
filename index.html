@@ -1629,6 +1629,36 @@ button:active {
   }
 }
 
+/* Peringatan stok menipis */
+.low-stock-notice {
+  margin: 18px 0 24px;
+  padding: 18px 20px;
+  border: 1px solid #f2d28b;
+  border-radius: 14px;
+  background: #fff8e7;
+  color: #7a4b00;
+}
+
+.low-stock-notice strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.low-stock-notice ul {
+  margin: 8px 0 0;
+  padding-left: 22px;
+  line-height: 1.8;
+}
+
+.low-stock-notice li {
+  overflow-wrap: anywhere;
+}
+
+.low-stock-notice.hidden {
+  display: none !important;
+}
+
 </style> 
 </head>
 <body>
@@ -1700,6 +1730,9 @@ button:active {
     <span>Total Produk</span>
     <strong id="statProducts">0</strong>
   </div>
+  
+<div id="lowStockNotice" class="low-stock-notice hidden"></div>
+
   <div class="admin-stat-card">
     <span>Total Stok</span>
     <strong id="statStock">0</strong>
@@ -2069,6 +2102,36 @@ $("statStock").textContent = products.reduce(
 $("statCategories").textContent = new Set(
   products.map(p => (p.category || "").trim()).filter(Boolean)
 ).size;
+
+const lowStock = products.filter(
+  p => Number(p.stock || 0) <= 10
+);
+
+const notice = $("lowStockNotice");
+notice.replaceChildren();
+
+if (lowStock.length > 0) {
+  notice.classList.remove("hidden");
+
+  const heading = document.createElement("strong");
+  heading.textContent = "⚠️ Peringatan Stok Menipis";
+
+  const list = document.createElement("ul");
+
+  lowStock.forEach(p => {
+    const item = document.createElement("li");
+    item.textContent =
+      (p.name || "Produk tanpa nama") +
+      " — sisa stok: " +
+      (Number(p.stock) || 0);
+
+    list.append(item);
+  });
+
+  notice.append(heading, list);
+} else {
+  notice.classList.add("hidden");
+}
 
 products.forEach(p => { 
   const line = document.createElement("div");
