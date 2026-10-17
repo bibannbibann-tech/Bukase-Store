@@ -1923,6 +1923,264 @@ footer {
   }
 }
 
+/* BUKASE STORE — PREMIUM PACKAGING THEME */
+:root {
+  --primary: #347849;
+  --dark: #173c29;
+  --muted: #68786c;
+  --bg: #f7f8f1;
+  --white: #ffffff;
+  --border: #e0e7d9;
+  --accent: #f4d84b;
+}
+
+body {
+  background: #f7f8f1 !important;
+  color: #173c29 !important;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+header {
+  background: rgba(255,255,255,.97) !important;
+  border-bottom: 1px solid #e0e7d9 !important;
+  box-shadow: 0 5px 24px rgba(23,60,41,.06) !important;
+}
+
+.logo {
+  color: #173c29 !important;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.logo span {
+  color: #347849 !important;
+}
+
+nav a:hover {
+  color: #347849 !important;
+}
+
+/* Banner utama */
+.hero {
+  max-width: 1200px;
+  margin: 26px auto !important;
+  padding: clamp(38px, 7vw, 82px) clamp(22px, 6vw, 76px) !important;
+  border-radius: 26px !important;
+  background:
+    radial-gradient(circle at 90% 15%, rgba(244,216,75,.35), transparent 28%),
+    linear-gradient(125deg, #173c29 0%, #286740 68%, #4b8752 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 22px 48px rgba(23,60,41,.16) !important;
+}
+
+.hero small {
+  color: #f4d84b !important;
+  letter-spacing: 2.5px;
+  font-weight: 800;
+}
+
+.hero h1 {
+  color: #fff !important;
+  max-width: 760px;
+  line-height: 1.12;
+  font-size: clamp(32px, 5vw, 56px) !important;
+}
+
+.hero p {
+  color: #e4efe4 !important;
+  max-width: 620px;
+  line-height: 1.8;
+}
+
+.hero button {
+  background: #f4d84b !important;
+  color: #173c29 !important;
+  border: 0 !important;
+  border-radius: 12px !important;
+  font-weight: 800 !important;
+}
+
+.hero button:hover {
+  background: #ffe878 !important;
+}
+
+/* Konten dan katalog */
+main {
+  max-width: 1200px;
+  width: 90%;
+  margin: 42px auto 76px;
+}
+
+main h2 {
+  color: #173c29 !important;
+  font-weight: 850;
+  letter-spacing: -.6px;
+}
+
+main #desc {
+  color: #68786c !important;
+}
+
+#catalog.grid,
+#products,
+.products,
+.product-list {
+  gap: 22px !important;
+  align-items: stretch;
+}
+
+#catalog .card,
+.card,
+.product-card {
+  background: #fff !important;
+  border: 1px solid #e0e7d9 !important;
+  border-radius: 19px !important;
+  overflow: hidden;
+  box-shadow: 0 6px 22px rgba(23,60,41,.055) !important;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+#catalog .card:hover,
+.card:hover,
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 32px rgba(23,60,41,.12) !important;
+}
+
+#catalog .card img,
+.product-media {
+  background: #f1f5e9 !important;
+}
+
+#catalog .card img {
+  object-fit: contain;
+  padding: 16px;
+}
+
+.card h3,
+.card-body h3,
+.product-card h3 {
+  color: #173c29 !important;
+}
+
+.price,
+.product-card .price {
+  color: #286740 !important;
+  font-weight: 850;
+}
+
+.tag,
+.product-card .tag {
+  background: #f9f0b8 !important;
+  color: #365d32 !important;
+  border-radius: 7px;
+}
+
+/* Tombol dan formulir */
+button,
+.btn,
+a.button {
+  background: #347849 !important;
+  color: #fff !important;
+  border-radius: 11px !important;
+  font-weight: 750 !important;
+  transition: .2s ease;
+}
+
+button:hover,
+.btn:hover,
+a.button:hover {
+  background: #245b36 !important;
+}
+
+button.secondary {
+  background: #fff !important;
+  color: #245b36 !important;
+  border: 1px solid #d6e3d1 !important;
+}
+
+input,
+select,
+textarea {
+  border-color: #d8e2d3 !important;
+  border-radius: 11px !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #347849 !important;
+  box-shadow: 0 0 0 3px rgba(52,120,73,.12) !important;
+}
+
+/* Panel admin tetap rapi */
+#admin,
+.admin,
+.admin-panel,
+#adminPanel,
+#detail,
+.detail,
+.panel {
+  border-color: #e0e7d9 !important;
+  border-radius: 18px !important;
+  box-shadow: 0 6px 22px rgba(23,60,41,.05) !important;
+}
+
+/* Tidak menggunakan tombol pemesanan WhatsApp */
+.product-wa-btn {
+  display: none !important;
+}
+
+footer {
+  background: #173c29 !important;
+  color: #edf5e8 !important;
+  padding: 38px 6%;
+}
+
+@media (max-width: 600px) {
+  .hero {
+    margin: 16px 0 !important;
+    padding: 36px 22px !important;
+    border-radius: 19px !important;
+  }
+
+  .hero h1 {
+    font-size: 32px !important;
+  }
+
+  main {
+    width: calc(100% - 28px);
+    margin-top: 24px;
+  }
+
+  #catalog.grid,
+  #products,
+  .products,
+  .product-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  #catalog .card img {
+    height: 145px;
+    padding: 8px;
+  }
+
+  .card-body {
+    padding: 13px;
+  }
+}
+
+@media (max-width: 380px) {
+  #catalog.grid,
+  #products,
+  .products,
+  .product-list {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 </style> 
 </head>
 <body>
