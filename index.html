@@ -2659,6 +2659,7 @@ button,input,select{font-family:inherit!important}button{cursor:pointer!importan
   <nav class="site-nav" aria-label="Navigasi utama">
     <button class="nav-link active" type="button" onclick="navigatePage('home')">Beranda</button>
     <button class="nav-link" type="button" onclick="navigatePage('catalog')">Katalog Produk</button>
+    <button class="nav-link" type="button" onclick="openCart()">🛒 Keranjang</button>
     <button class="nav-link" type="button" onclick="navigatePage('about')">Tentang Kami</button>
     <button class="nav-link" type="button" onclick="navigatePage('services')">Layanan</button>
     <button class="nav-link" type="button" onclick="navigatePage('contact')">Kontak</button>
@@ -2711,6 +2712,59 @@ button,input,select{font-family:inherit!important}button{cursor:pointer!importan
   <div id="catalog" class="grid"></div>
 
   <section id="detail" class="panel hidden"></section>
+
+<section id="cartPanel" class="panel hidden">
+  <h2>Keranjang Belanja</h2>
+  <div id="cartItems">
+    <p>Keranjang kamu masih kosong.</p>
+  </div>
+  <h3 id="cartTotal">Total: Rp0</h3>
+  <button onclick="home()">Lanjut Belanja</button>
+  <button onclick="showCheckout()">Lanjut Checkout</button>
+</section>
+
+<section id="checkoutPanel" class="panel hidden">
+  <h2>Checkout Pesanan</h2>
+  <form id="checkoutForm" onsubmit="submitCheckout(event)">
+    <label>Nama lengkap</label>
+    <input id="coName" required>
+
+    <label>Nomor telepon</label>
+    <input id="coPhone" type="tel" required>
+
+    <label>Alamat lengkap</label>
+    <textarea id="coAddress" required></textarea>
+
+    <label>Kota/Kabupaten</label>
+    <input id="coCity" required>
+
+    <label>Kode pos</label>
+    <input id="coPostal">
+
+    <label>Metode pengiriman</label>
+    <select id="coShipping" required>
+      <option value="">Pilih pengiriman</option>
+      <option value="JNE">JNE</option>
+      <option value="J&T">J&T</option>
+      <option value="Kurir sendiri">Kurir sendiri / pickup</option>
+      <option value="Konfirmasi admin">Konfirmasi admin</option>
+    </select>
+
+    <label>Metode pembayaran</label>
+    <select id="coPayment" required>
+      <option value="">Pilih pembayaran</option>
+      <option value="Transfer manual">Transfer manual</option>
+      <option value="Konfirmasi admin">Konfirmasi admin</option>
+    </select>
+
+    <label>Catatan pesanan</label>
+    <textarea id="coNotes"></textarea>
+
+    <h3 id="checkoutTotal">Total: Rp0</h3>
+    <button type="submit">Kirim Pesanan</button>
+    <p id="checkoutMsg"></p>
+  </form>
+</section>
 
   <section id="login" class="panel hidden">
     <h2>Login Admin</h2>
@@ -3065,9 +3119,167 @@ async function showDetail(p) {
     const line = document.createElement("p");
     line.textContent = v.variant_name + " — " + money(v.price) + " / " + (v.unit || "pcs");
     box.append(line);
+    
+const addButton = document.createElement("button");
+addButton.textContent = "Tambah ke Keranjang";
+addButton.type = "button";
+addButton.onclick = () => addToCart(p, v);
+box.append(addButton);
+
   });
 }
 
+
+let bukaseCart = [];
+
+function addToCart(product, variant) {
+  const key = product.id + ":" + (variant.id || "base");
+  const existing = bukaseCart.find(item => item.key === key);
+
+  if (existing) {
+    existing.quantity++;
+  } else {
+    bukaseCart.push({
+      key,
+      product_id: product.id,
+      product_name: product.name,
+      variant_name: variant.variant_name || "Standar",
+      unit: variant.unit || "pcs",
+      unit_price: Number(variant.price || 0),
+      quantity: 1
+    });
+  }
+
+  renderCart();
+  alert("Produk ditambahkan ke keranjang.");
+}
+
+function renderCart() {
+  const box = $("cartItems");
+  if (!box) return;
+
+  box.replaceChildren();
+  let total = 0;
+
+  if (!bukaseCart.length) {
+    box.textContent = "Keranjang masih kosong.";
+  }
+
+  bukaseCart.forEach(item => {
+    const row = document.createElement("div");
+    const name = document.createElement("p");
+    name.textContent = item.product_name + " — " + item.variant_name;
+
+    const price = document.createElement("p");
+    price.textContent = money(item.unit_price) + " × " + item.quantity;
+
+    const minus = document.createElement("button");
+    minus.textContent = "−";
+    minus.onclick = () => {
+      item.quantity--;
+      if (item.quantity <= 0) {
+        bukaseCart = bukaseCart.filter(x => x.key !== item.key);
+      }
+      renderCart();
+    };
+
+    const plus = document.createElement("button");
+    plus.textContent = "+";
+    plus.onclick = () => {
+      item.quantity++;
+      renderCart();
+    };
+
+    row.append(name, price, minus, plus);
+    box.append(row);
+    total += item.unit_price * item.quantity;
+  });
+
+  $("cartTotal").textContent = "Total: " + money(total);
+  $("checkoutTotal").textContent =
+    "Total produk: " + money(total) + " (belum termasuk ongkir)";
+}
+
+function openCart() {
+  showPage("Keranjang Belanja", "Periksa produk pilihanmu.");
+  $("cartPanel").classList.remove("hidden");
+  $("checkoutPanel").classList.add("hidden");
+  renderCart();
+}
+
+function showCheckout() {
+  if (!bukaseCart.length) {
+    alert("Keranjang masih kosong.");
+    return;
+  }
+
+  showPage("Checkout", "Lengkapi data penerima pesanan.");
+  $("cartPanel").classList.add("hidden");
+  $("checkoutPanel").classList.remove("hidden");
+  renderCart();
+}
+
+async function submitCheckout(event) {
+  event.preventDefault();
+
+  if (!bukaseCart.length) {
+    $("checkoutMsg").textContent = "Keranjang masih kosong.";
+    return;
+  }
+
+  const total = bukaseCart.reduce(
+    (sum, item) => sum + item.unit_price * item.quantity, 0
+  );
+
+  const payload = {
+    p_customer_name: $("coName").value.trim(),
+    p_customer_phone: $("coPhone").value.trim(),
+    p_shipping_address: $("coAddress").value.trim(),
+    p_city: $("coCity").value.trim(),
+    p_postal_code: $("coPostal").value.trim(),
+    p_shipping_method: $("coShipping").value,
+    p_payment_method: $("coPayment").value,
+    p_notes: $("coNotes").value.trim(),
+    p_shipping_cost: 0,
+    p_total: total,
+    p_items: bukaseCart.map(item => ({
+      product_id: item.product_id,
+      product_name: item.product_name,
+      variant_name: item.variant_name,
+      unit: item.unit,
+      quantity: item.quantity,
+      unit_price: item.unit_price,
+      line_total: item.unit_price * item.quantity
+    }))
+  };
+
+  const button = $("checkoutForm").querySelector(
+    'button[type="submit"]'
+  );
+  button.disabled = true;
+  $("checkoutMsg").textContent = "Mengirim pesanan...";
+
+  try {
+    const { data, error } = await db.rpc(
+      "create_order_with_items", payload
+    );
+
+    if (error) throw error;
+
+    $("checkoutMsg").textContent =
+      "Pesanan tersimpan. Nomor pesanan: " +
+      (data.order_number || data.id);
+
+    bukaseCart = [];
+    renderCart();
+    $("checkoutForm").reset();
+  } catch (error) {
+    $("checkoutMsg").textContent =
+      "Pesanan gagal disimpan: " + error.message;
+  } finally {
+    button.disabled = false;
+  }
+}
 
 async function loadProducts() {
   $("status").textContent = "Memuat produk...";
