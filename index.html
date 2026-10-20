@@ -3186,6 +3186,7 @@ function showAllProducts() {
   products.forEach(p => $("catalog").append(makeCard(p, () => showDetail(p))));
 }
 
+
 function makeCard(p, action) {
   const card = document.createElement("article");
   card.className = "card product-card";
@@ -3199,16 +3200,16 @@ function makeCard(p, action) {
   img.loading = "lazy";
 
   img.onerror = () => {
-    img.style.display = "none";
+    img.remove();
     imageBox.classList.add("no-image");
     imageBox.textContent = "Foto produk segera tersedia";
   };
 
-  if (!p.image_url) {
+  if (p.image_url) {
+    imageBox.append(img);
+  } else {
     imageBox.classList.add("no-image");
     imageBox.textContent = "Foto produk segera tersedia";
-  } else {
-    imageBox.append(img);
   }
 
   const body = document.createElement("div");
@@ -3216,42 +3217,46 @@ function makeCard(p, action) {
 
   const tag = document.createElement("div");
   tag.className = "tag";
-  tag.textContent = p.category || "Packaging";
+  tag.textContent = p.category || "PACKAGING";
 
   const h = document.createElement("h3");
   h.textContent = p.name || "Produk";
 
   const d = document.createElement("p");
-  d.textContent = p.description || "Kemasan berkualitas untuk kebutuhan bisnis Anda.";
+  d.textContent = p.description ||
+    "Kemasan berkualitas untuk kebutuhan bisnis Anda.";
+
+  const priceArea = document.createElement("div");
+  priceArea.className = "product-price-area";
 
   const priceLabel = document.createElement("small");
-  priceLabel.textContent = "Harga mulai dari";
+  priceLabel.textContent = "HARGA MULAI DARI";
 
   const price = document.createElement("div");
   price.className = "price";
   price.textContent = money(p.price);
 
+  priceArea.append(priceLabel, price);
+
   const btn = document.createElement("button");
   btn.type = "button";
   btn.className = "product-detail-btn";
-  btn.textContent = "Lihat Detail →";
+  btn.textContent = "Lihat Detail";
+
+  const arrow = document.createElement("span");
+  arrow.textContent = " →";
+  btn.append(arrow);
 
   btn.onclick = (event) => {
     event.stopPropagation();
     action();
   };
 
-  body.append(tag, h, d, priceLabel, price, btn);
+  body.append(tag, h, d, priceArea, btn);
   card.append(imageBox, body);
   card.onclick = action;
 
   return card;
-}
-
-function visibleProducts() {
-  return allProducts.filter(p =>
-    !/paper\s*bowl/i.test((p.name || "") + " " + (p.category || ""))
-  );
 }
 
 function home() {
