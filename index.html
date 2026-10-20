@@ -3124,6 +3124,154 @@ button,input,select{font-family:inherit!important}button{cursor:pointer!importan
   }
 }
 
+/* BUKASE STORE — Premium Navigation */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px 5%;
+  background: rgba(11, 36, 28, 0.97);
+  border-bottom: 1px solid rgba(198, 161, 91, 0.45);
+  box-shadow: 0 8px 30px rgba(11, 36, 28, 0.12);
+  backdrop-filter: blur(14px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  background: transparent;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  text-align: left;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid #C6A15B;
+  color: #C6A15B;
+  font-family: Georgia, serif;
+  font-size: 27px;
+}
+
+.brand-copy strong {
+  display: block;
+  color: #F5F0E6;
+  font-family: Georgia, serif;
+  font-size: 18px;
+  letter-spacing: 1.5px;
+}
+
+.brand-copy em {
+  color: #C6A15B;
+  font-style: normal;
+}
+
+.brand-copy small {
+  display: block;
+  margin-top: 5px;
+  color: #C7D2CA;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.site-nav .nav-link {
+  padding: 11px 13px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  color: #E7EDE8;
+  font-size: 12px;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.site-nav .nav-link:hover,
+.site-nav .nav-link.active {
+  color: #D9B873;
+  border-color: rgba(198, 161, 91, 0.35);
+  background: rgba(198, 161, 91, 0.08);
+}
+
+.admin-nav {
+  flex-shrink: 0;
+  padding: 12px 17px;
+  background: #C6A15B;
+  border: 1px solid #C6A15B;
+  border-radius: 3px;
+  color: #0B241C;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.admin-nav:hover {
+  background: #E0C58D;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .site-header {
+    position: relative;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 15px 4%;
+    gap: 14px;
+  }
+
+  .site-nav {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+  }
+
+  .site-nav .nav-link {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-copy strong {
+    font-size: 15px;
+  }
+
+  .brand-copy small {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+  }
+
+  .brand-mark {
+    width: 40px;
+    height: 40px;
+  }
+
+  .admin-nav {
+    padding: 10px;
+    font-size: 11px;
+  }
+}
+
 </style>
 </head>
 <body>
