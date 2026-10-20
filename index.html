@@ -4096,26 +4096,112 @@ async function submitCheckout(event) {
     if (error) throw error;
 
   
+
 $("checkoutMsg").innerHTML = `
-  <div style="padding:20px;background:#0B241C;color:#F5F0E6;border:1px solid #C6A15B;border-radius:8px;margin-top:16px">
-    <div style="color:#C6A15B;font-size:12px;letter-spacing:2px;margin-bottom:8px">
-      BUKASE STORE
+  <div style="
+    background:linear-gradient(145deg,#0B241C,#174C3A);
+    color:#F5F0E6;
+    border:1px solid #C6A15B;
+    border-radius:14px;
+    padding:28px;
+    margin-top:20px;
+    box-shadow:0 12px 35px rgba(11,36,28,.18);
+  ">
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      border-bottom:1px solid #ffffff25;
+      padding-bottom:18px;
+    ">
+      <div>
+        <div style="color:#C6A15B;letter-spacing:3px;font-size:11px">
+          BUKASE STORE
+        </div>
+        <h2 style="margin:8px 0 0;font-size:23px">
+          Pesanan Berhasil
+        </h2>
+      </div>
+      <div style="
+        border:1px solid #C6A15B;
+        color:#C6A15B;
+        border-radius:50%;
+        width:42px;height:42px;
+        display:flex;align-items:center;justify-content:center;
+        font-size:22px;
+      ">✓</div>
     </div>
-    <h3 style="margin:0 0 12px">Pesanan Berhasil Dibuat</h3>
-    <p style="margin:6px 0">Nomor pesanan:</p>
-    <strong>${data.order_number || data.id}</strong>
-    <p style="margin:14px 0 6px;color:#C6A15B;font-weight:bold">
-      SIMULASI PEMBAYARAN
+
+    <p style="color:#D8CDB8;font-size:13px;margin-top:20px">
+      NOMOR PESANAN
     </p>
-    <p style="font-size:13px;line-height:1.7">
-      Ini hanya pengujian website. Tidak ada transfer sungguhan
-      dan status pembayaran belum dikonfirmasi.
+    <div style="
+      background:#ffffff0d;
+      border:1px solid #ffffff20;
+      border-radius:8px;
+      padding:15px;
+      font-size:16px;
+      font-weight:bold;
+      overflow-wrap:anywhere;
+    ">${data.order_number || data.id}</div>
+
+    <div style="
+      margin-top:22px;
+      padding:18px;
+      background:#F5F0E6;
+      color:#0B241C;
+      border-radius:8px;
+    ">
+      <div style="font-size:11px;letter-spacing:2px;color:#84652F">
+        MODE PENGUJIAN
+      </div>
+      <h3 style="margin:8px 0">Simulasi Pembayaran</h3>
+      
+<div style="
+  margin:14px 0;
+  padding:16px;
+  background:#0B241C;
+  color:#F5F0E6;
+  border:1px solid #C6A15B;
+  border-radius:8px;
+">
+  <p style="margin:0 0 8px;color:#D8CDB8;font-size:12px">
+    TOTAL TAGIHAN
+  </p>
+  <div style="font-size:26px;font-weight:bold;color:#C6A15B">
+    Rp ${total.toLocaleString("id-ID")}
+  </div>
+  <p style="font-size:11px;color:#D8CDB8;margin:8px 0 0">
+    Belum termasuk ongkos kirim jika ada.
+  </p>
+</div>
+
+      <p style="font-size:13px;line-height:1.8;margin:0">
+        Pesanan sudah dikirim ke sistem. Pembayaran ini hanya simulasi,
+        tidak ada transfer uang sungguhan dan pembayaran belum terverifikasi.
+      </p>
+      <button type="button"
+        onclick="alert('Pengujian berhasil. Ini bukan pembayaran sungguhan dan status pembayaran belum berubah.')"
+        style="
+          width:100%;
+          margin-top:18px;
+          background:#C6A15B;
+          color:#0B241C;
+          border:0;
+          border-radius:6px;
+          padding:15px;
+          font-weight:bold;
+          cursor:pointer;
+          font-size:14px;
+        ">
+        UJI TOMBOL PEMBAYARAN
+      </button>
+    </div>
+
+    <p style="font-size:12px;color:#D8CDB8;line-height:1.7;margin:18px 0 0">
+      Simpan nomor pesanan ini untuk pengecekan melalui admin BUKASE STORE.
     </p>
-    <button type="button"
-      onclick="alert('Simulasi berhasil! Ini bukan pembayaran sungguhan.')"
-      style="background:#C6A15B;color:#0B241C;border:0;padding:12px 18px;border-radius:4px;font-weight:bold;cursor:pointer">
-      Simulasikan Pembayaran
-    </button>
   </div>
 `;
 
