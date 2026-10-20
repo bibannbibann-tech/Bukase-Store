@@ -2806,6 +2806,92 @@ button,input,select{font-family:inherit!important}button{cursor:pointer!importan
   }
 }
 
+/* FINAL OVERRIDE — BUKASE CATALOG */
+#catalog.grid > .card.product-card {
+  display: flex !important;
+  flex-direction: column !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+  background: #fffdf7 !important;
+  border: 1px solid #d8c995 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 10px 28px rgba(16, 45, 37, .10) !important;
+}
+
+#catalog.grid > .card.product-card .product-image {
+  width: 100% !important;
+  height: 230px !important;
+  min-height: 230px !important;
+  padding: 16px !important;
+  background: linear-gradient(145deg, #f7f4e9, #e6ecdf) !important;
+}
+
+#catalog.grid > .card.product-card .product-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  padding: 0 !important;
+}
+
+#catalog.grid > .card.product-card .card-body {
+  display: flex !important;
+  flex: 1 !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 10px !important;
+  padding: 22px !important;
+}
+
+#catalog.grid > .card.product-card h3 {
+  margin: 8px 0 !important;
+  color: #102d25 !important;
+  font-family: Georgia, serif !important;
+  font-size: 22px !important;
+  line-height: 1.3 !important;
+}
+
+#catalog.grid > .card.product-card .price {
+  color: #8a6d16 !important;
+  font-family: Georgia, serif !important;
+  font-size: 26px !important;
+  font-weight: 700 !important;
+}
+
+#catalog.grid > .card.product-card .product-detail-btn {
+  width: 100% !important;
+  margin-top: auto !important;
+  padding: 14px !important;
+  border: 1px solid #102d25 !important;
+  border-radius: 5px !important;
+  background: #102d25 !important;
+  color: #fff !important;
+}
+
+#catalog.grid > .card.product-card .product-detail-btn:hover {
+  background: #e6c65b !important;
+  color: #102d25 !important;
+  border-color: #e6c65b !important;
+}
+
+@media (max-width: 600px) {
+  #catalog.grid > .card.product-card .product-image {
+    height: 145px !important;
+    min-height: 145px !important;
+  }
+
+  #catalog.grid > .card.product-card .card-body {
+    padding: 12px !important;
+  }
+
+  #catalog.grid > .card.product-card h3 {
+    font-size: 16px !important;
+  }
+
+  #catalog.grid > .card.product-card .price {
+    font-size: 19px !important;
+  }
+}
+
 </style>
 </head>
 <body>
