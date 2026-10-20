@@ -4220,10 +4220,46 @@ $("checkoutMsg").innerHTML = `
       </button>
     </div>
 
-    <p style="font-size:12px;color:#D8CDB8;line-height:1.7;margin:18px 0 0">
-      Simpan nomor pesanan ini untuk pengecekan melalui admin BUKASE STORE.
-    </p>
-  </div>
+    
+<div style="
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:10px;
+  margin-top:20px;
+">
+  <button type="button"
+    onclick="navigatePage('catalog')"
+    style="
+      padding:14px;
+      background:#C6A15B;
+      color:#0B241C;
+      border:0;
+      border-radius:6px;
+      font-weight:800;
+      cursor:pointer;
+    ">
+    ← Kembali ke Katalog
+  </button>
+
+  <button type="button"
+    onclick="navigatePage('home')"
+    style="
+      padding:14px;
+      background:transparent;
+      color:#FFFFFF;
+      border:1px solid #C6A15B;
+      border-radius:6px;
+      font-weight:800;
+      cursor:pointer;
+    ">
+    Kembali ke Beranda
+  </button>
+</div>
+
+<p style="font-size:12px;color:#D8CDB8;line-height:1.7;margin:18px 0 0">
+  Simpan nomor pesanan ini untuk pengecekan melalui admin BUKASE STORE.
+</p>
+</div>
 `;
 
     bukaseCart = [];
