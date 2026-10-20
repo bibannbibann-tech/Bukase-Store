@@ -3414,8 +3414,14 @@ function showAllProducts() {
   }
   $("status").textContent = products.length + " produk tersedia";
   products.forEach(p => $("catalog").append(makeCard(p, () => showDetail(p))));
+
 }
 
+function visibleProducts() {
+  return allProducts.filter(p =>
+    !/paper\s*bowl/i.test((p.name || "") + " " + (p.category || ""))
+  );
+}
 
 function makeCard(p, action) {
   const card = document.createElement("article");
