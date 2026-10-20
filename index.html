@@ -3569,50 +3569,164 @@ function searchProducts() {
 
 async function showDetail(p) {
   showPage(p.name, p.description || "Detail produk");
+
   $("catalog").replaceChildren();
+
   const box = $("detail");
   box.classList.remove("hidden");
   box.replaceChildren();
 
-  const h = document.createElement("h2");
-  h.textContent = p.name;
+  box.style.cssText = `
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));
+    gap:32px;
+    padding:clamp(20px,4vw,48px);
+    margin:28px auto;
+    background:#fffdf7;
+    border:1px solid #e7dfca;
+    border-radius:20px;
+    box-shadow:0 20px 55px rgba(20,45,32,.10);
+    color:#183b2d;
+    max-width:1200px;
+  `;
+
+  const media = document.createElement("div");
+  media.style.cssText = `
+    min-height:360px;
+    border-radius:16px;
+    background:linear-gradient(145deg,#173c2d,#0b241b);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    overflow:hidden;
+  `;
+
+  if (p.image_url) {
+    const img = document.createElement("img");
+    img.src = p.image_url;
+    img.alt = p.name;
+    img.style.cssText =
+      "width:100%;height:340px;object-fit:contain;border-radius:12px";
+    img.onerror = () => {
+      img.remove();
+      media.textContent = "BUKASE";
+    };
+    media.append(img);
+  } else {
+    media.innerHTML = `
+      <div style="text-align:center;color:#e3c783">
+        <div style="font-size:13px;letter-spacing:5px">BUKASE</div>
+        <div style="font-size:clamp(28px,4vw,48px);font-weight:800;margin-top:12px">
+          PACKAGING
+        </div>
+        <div style="font-size:12px;letter-spacing:3px;margin-top:12px">
+          MADE FOR YOUR BUSINESS
+        </div>
+      </div>`;
+  }
+
+  const info = document.createElement("div");
+  info.style.cssText = "align-self:center;min-width:0";
+
+  const eyebrow = document.createElement("div");
+  eyebrow.textContent = "BUKASE STORE  /  PACKAGING COLLECTION";
+  eyebrow.style.cssText =
+    "font-size:11px;letter-spacing:2px;color:#9b7937;font-weight:800;margin-bottom:18px";
+
+  const title = document.createElement("h2");
+  title.textContent = p.name;
+  title.style.cssText =
+    "font-size:clamp(30px,4vw,46px);line-height:1.12;margin:0 0 16px;color:#173c2d";
+
   const desc = document.createElement("p");
-  desc.textContent = p.description || "";
-  const price = document.createElement("h3");
-  price.textContent = "Harga dasar: " + money(p.price);
-  box.append(h,desc,price);
+  desc.textContent = p.description || "Kemasan berkualitas untuk kebutuhan bisnis Anda.";
+  desc.style.cssText = "color:#69746b;line-height:1.9;font-size:15px";
+
+  const priceLabel = document.createElement("div");
+  priceLabel.textContent = "HARGA MULAI DARI";
+  priceLabel.style.cssText =
+    "font-size:11px;letter-spacing:2px;color:#8a7750;margin-top:26px";
+
+  const price = document.createElement("div");
+  price.textContent = money(p.price);
+  price.style.cssText =
+    "font-size:clamp(28px,4vw,38px);font-weight:800;color:#173c2d;margin:8px 0 26px";
+
+  const divider = document.createElement("div");
+  divider.style.cssText = "height:1px;background:#e8e1d2;margin:22px 0";
 
   const heading = document.createElement("h3");
-  heading.textContent = "Ukuran dan harga";
-  box.append(heading);
+  heading.textContent = "Pilih ukuran & varian";
+  heading.style.cssText = "font-size:17px;margin:0 0 16px";
+
+  info.append(eyebrow,title,desc,priceLabel,price,divider,heading);
+  box.append(media,info);
 
   const {data, error} = await db.from("product_variants")
     .select("id,variant_name,price,unit")
-    .eq("product_id", p.id).order("id");
+    .eq("product_id",p.id)
+    .order("id");
 
   if (error) {
     const msg = document.createElement("p");
-    msg.textContent = "Varian belum dapat dimuat.";
-    box.append(msg);
+    msg.textContent = "Varian belum dapat dimuat. Silakan coba lagi.";
+    msg.style.color = "#a33";
+    info.append(msg);
     return;
   }
-  if (!data.length) {
-    const msg = document.createElement("p");
-    msg.textContent = "Belum ada ukuran tambahan. Harga dasar ditampilkan di atas.";
-    box.append(msg);
-  }
-  data.forEach(v => {
-    const line = document.createElement("p");
-    line.textContent = v.variant_name + " — " + money(v.price) + " / " + (v.unit || "pcs");
-    box.append(line);
-    
-const addButton = document.createElement("button");
-addButton.textContent = "Tambah ke Keranjang";
-addButton.type = "button";
-addButton.onclick = () => addToCart(p, v);
-box.append(addButton);
 
+  if (!data || !data.length) {
+    const msg = document.createElement("p");
+    msg.textContent = "Belum ada varian tambahan untuk produk ini.";
+    msg.style.cssText = "color:#69746b;padding:16px;background:#f4f1e8;border-radius:10px";
+    info.append(msg);
+  }
+
+  (data || []).forEach(v => {
+    const card = document.createElement("div");
+    card.style.cssText = `
+      display:flex;flex-wrap:wrap;align-items:center;
+      justify-content:space-between;gap:14px;
+      padding:16px;margin:12px 0;
+      border:1px solid #ded8c8;border-radius:12px;background:#fff;
+    `;
+
+    const details = document.createElement("div");
+    const variant = document.createElement("div");
+    variant.textContent = v.variant_name;
+    variant.style.cssText = "font-weight:800;font-size:15px";
+
+    const variantPrice = document.createElement("div");
+    variantPrice.textContent = money(v.price) + " / " + (v.unit || "pcs");
+    variantPrice.style.cssText = "color:#8b713b;margin-top:7px;font-size:14px";
+
+    details.append(variant,variantPrice);
+
+    const addButton = document.createElement("button");
+    addButton.textContent = "＋ Tambah";
+    addButton.type = "button";
+    addButton.style.cssText = `
+      border:0;border-radius:8px;padding:13px 18px;
+      background:#173c2d;color:#fffdf7;font-weight:700;
+      cursor:pointer;
+    `;
+    addButton.onclick = () => addToCart(p,v);
+
+    card.append(details,addButton);
+    info.append(card);
   });
+
+  const assurance = document.createElement("div");
+  assurance.innerHTML = `
+    <div style="font-weight:800;margin-bottom:8px">BUKASE PACKAGING PARTNER</div>
+    <div style="color:#69746b;font-size:13px;line-height:1.8">
+      Pilihan kemasan untuk mendukung kebutuhan usaha Anda.
+      Detail pesanan dapat diperiksa melalui keranjang.
+    </div>`;
+  assurance.style.cssText =
+    "padding:20px;margin-top:24px;border-radius:12px;background:#f2efe5;border-left:3px solid #b99a53";
+  info.append(assurance);
 }
 
 
