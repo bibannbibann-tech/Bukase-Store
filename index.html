@@ -4095,9 +4095,29 @@ async function submitCheckout(event) {
 
     if (error) throw error;
 
-    $("checkoutMsg").textContent =
-      "Pesanan tersimpan. Nomor pesanan: " +
-      (data.order_number || data.id);
+  
+$("checkoutMsg").innerHTML = `
+  <div style="padding:20px;background:#0B241C;color:#F5F0E6;border:1px solid #C6A15B;border-radius:8px;margin-top:16px">
+    <div style="color:#C6A15B;font-size:12px;letter-spacing:2px;margin-bottom:8px">
+      BUKASE STORE
+    </div>
+    <h3 style="margin:0 0 12px">Pesanan Berhasil Dibuat</h3>
+    <p style="margin:6px 0">Nomor pesanan:</p>
+    <strong>${data.order_number || data.id}</strong>
+    <p style="margin:14px 0 6px;color:#C6A15B;font-weight:bold">
+      SIMULASI PEMBAYARAN
+    </p>
+    <p style="font-size:13px;line-height:1.7">
+      Ini hanya pengujian website. Tidak ada transfer sungguhan
+      dan status pembayaran belum dikonfirmasi.
+    </p>
+    <button type="button"
+      onclick="alert('Simulasi berhasil! Ini bukan pembayaran sungguhan.')"
+      style="background:#C6A15B;color:#0B241C;border:0;padding:12px 18px;border-radius:4px;font-weight:bold;cursor:pointer">
+      Simulasikan Pembayaran
+    </button>
+  </div>
+`;
 
     bukaseCart = [];
     renderCart();
