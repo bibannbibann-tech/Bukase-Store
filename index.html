@@ -2658,6 +2658,101 @@ button,input,select{font-family:inherit!important}button{cursor:pointer!importan
 @media(max-width:600px){.site-header{padding:12px 16px!important}.brand-mark{width:39px!important;height:39px!important}.brand-copy strong{font-size:15px!important}.admin-nav{padding:10px 12px!important;font-size:10px!important}.nav-link{white-space:nowrap!important}.hero{padding:48px 23px 34px!important;min-height:unset!important}.hero:after{inset:10px}.hero h1{font-size:43px!important}.hero p{font-size:13px!important}.hero-art{min-height:285px!important;transform:scale(.94);transform-origin:top center;margin-bottom:-10px}.hero-benefits{gap:10px 15px!important;margin-top:27px!important}.hero-benefits span{font-size:9px!important}main{padding:44px 18px 70px!important}#catalog.grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}.product-media{min-height:145px!important}.product-card .price,.card .price{font-size:20px!important}.product-card .product-detail-btn{padding:10px 8px!important;font-size:10px!important}.panel{padding:20px!important}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
 
+/* BUKASE STORE — Premium Product Cards */
+#catalog.grid {
+  gap: 28px !important;
+  margin-top: 30px !important;
+}
+
+#catalog .product-card,
+#catalog .card,
+#catalog .product-card.card {
+  position: relative !important;
+  overflow: hidden !important;
+  border: 1px solid #e4dfcf !important;
+  border-radius: 10px !important;
+  background: #fffdf8 !important;
+  box-shadow: 0 8px 24px rgba(12, 33, 27, .07) !important;
+  transition: transform .3s ease, box-shadow .3s ease,
+    border-color .3s ease !important;
+}
+
+#catalog .product-card:hover,
+#catalog .card:hover {
+  transform: translateY(-6px) !important;
+  border-color: #c9aa55 !important;
+  box-shadow: 0 18px 38px rgba(12, 33, 27, .13) !important;
+}
+
+#catalog .product-media {
+  min-height: 235px !important;
+  padding: 22px !important;
+  background: linear-gradient(145deg, #f8f6ee, #e9ecdf) !important;
+  border-bottom: 1px solid #ebe6d8 !important;
+}
+
+#catalog .product-media img,
+#catalog .product-card img {
+  max-width: 100% !important;
+  transition: transform .4s ease !important;
+}
+
+#catalog .product-card:hover img {
+  transform: scale(1.045) !important;
+}
+
+#catalog .product-card .tag {
+  display: inline-block !important;
+  padding: 6px 10px !important;
+  background: #e9eee5 !important;
+  color: #244b3c !important;
+  border: 1px solid #dce4d6 !important;
+  border-radius: 3px !important;
+  font-size: 9px !important;
+  letter-spacing: .12em !important;
+}
+
+#catalog .product-card .price {
+  color: #173b2e !important;
+  font-family: Georgia, serif !important;
+  font-size: 26px !important;
+  font-weight: 600 !important;
+}
+
+#catalog .product-card .product-detail-btn {
+  width: 100% !important;
+  margin-top: 12px !important;
+  padding: 13px 16px !important;
+  border: 1px solid #173b2e !important;
+  border-radius: 4px !important;
+  background: #173b2e !important;
+  color: #fff !important;
+  font-size: 11px !important;
+  letter-spacing: .07em !important;
+  transition: background .2s ease, color .2s ease !important;
+}
+
+#catalog .product-card .product-detail-btn:hover {
+  background: #d5bd70 !important;
+  border-color: #d5bd70 !important;
+  color: #173b2e !important;
+}
+
+@media (max-width: 600px) {
+  #catalog.grid {
+    gap: 13px !important;
+  }
+
+  #catalog .product-media {
+    min-height: 150px !important;
+    padding: 12px !important;
+  }
+
+  #catalog .product-card .price {
+    font-size: 21px !important;
+  }
+}
+
 </style>
 </head>
 <body>
