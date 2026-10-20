@@ -3567,9 +3567,9 @@ function searchProducts() {
 }
 
 
+
 async function showDetail(p) {
   showPage(p.name, p.description || "Detail produk");
-
   $("catalog").replaceChildren();
 
   const box = $("detail");
@@ -3578,92 +3578,143 @@ async function showDetail(p) {
 
   box.style.cssText = `
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));
-    gap:32px;
-    padding:clamp(20px,4vw,48px);
-    margin:28px auto;
-    background:#fffdf7;
-    border:1px solid #e7dfca;
-    border-radius:20px;
-    box-shadow:0 20px 55px rgba(20,45,32,.10);
-    color:#183b2d;
-    max-width:1200px;
+    grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));
+    gap:clamp(24px,4vw,54px);
+    max-width:1320px;
+    margin:30px auto;
+    padding:clamp(18px,4vw,48px);
+    color:#f8f3e7;
+    background:#102b20;
+    border:1px solid #bda36a;
+    border-radius:4px;
+    box-shadow:0 25px 80px #0b201b30;
+    position:relative;
+    overflow:hidden;
+    box-sizing:border-box;
   `;
 
   const media = document.createElement("div");
   media.style.cssText = `
-    min-height:360px;
-    border-radius:16px;
-    background:linear-gradient(145deg,#173c2d,#0b241b);
+    min-height:clamp(300px,42vw,520px);
+    position:relative;
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:24px;
     overflow:hidden;
+    background:radial-gradient(ellipse at 50% 35%,#355846 0%,#193b2b 45%,#091d15 100%);
+    border:1px solid #b99a5b;
+    box-shadow:inset 0 0 60px #07170e80;
+  `;
+
+  const imageFrame = document.createElement("div");
+  imageFrame.style.cssText = `
+    width:100%;height:100%;min-height:inherit;
+    display:flex;align-items:center;justify-content:center;
+    padding:24px;box-sizing:border-box;
   `;
 
   if (p.image_url) {
     const img = document.createElement("img");
     img.src = p.image_url;
     img.alt = p.name;
-    img.style.cssText =
-      "width:100%;height:340px;object-fit:contain;border-radius:12px";
+    img.style.cssText = `
+      width:100%;height:clamp(270px,38vw,460px);
+      object-fit:contain;filter:drop-shadow(0 24px 25px #0007);
+      transition:transform .4s ease;
+    `;
+    img.onmouseenter = () => img.style.transform = "scale(1.04)";
+    img.onmouseleave = () => img.style.transform = "scale(1)";
     img.onerror = () => {
       img.remove();
-      media.textContent = "BUKASE";
+      imageFrame.innerHTML = `
+        <div style="text-align:center;color:#e4ca8d">
+          <div style="font-size:12px;letter-spacing:7px">BUKASE</div>
+          <div style="font-family:Georgia,serif;font-size:clamp(38px,5vw,66px);margin:18px 0">
+            PACKAGING
+          </div>
+          <div style="font-size:10px;letter-spacing:4px">CRAFTED FOR BUSINESS</div>
+        </div>`;
     };
-    media.append(img);
+    imageFrame.append(img);
   } else {
-    media.innerHTML = `
-      <div style="text-align:center;color:#e3c783">
-        <div style="font-size:13px;letter-spacing:5px">BUKASE</div>
-        <div style="font-size:clamp(28px,4vw,48px);font-weight:800;margin-top:12px">
+    imageFrame.innerHTML = `
+      <div style="text-align:center;color:#e4ca8d">
+        <div style="font-size:12px;letter-spacing:7px">BUKASE</div>
+        <div style="font-family:Georgia,serif;font-size:clamp(38px,5vw,66px);margin:18px 0">
           PACKAGING
         </div>
-        <div style="font-size:12px;letter-spacing:3px;margin-top:12px">
-          MADE FOR YOUR BUSINESS
-        </div>
+        <div style="font-size:10px;letter-spacing:4px">CRAFTED FOR BUSINESS</div>
       </div>`;
   }
 
+  const imageTag = document.createElement("div");
+  imageTag.textContent = "BUKASE  •  PACKAGING COLLECTION";
+  imageTag.style.cssText = `
+    position:absolute;left:18px;bottom:18px;
+    font-size:9px;letter-spacing:2px;color:#e4ca8d;
+    background:#0b201dcc;padding:11px 13px;
+  `;
+  media.append(imageFrame,imageTag);
+
   const info = document.createElement("div");
-  info.style.cssText = "align-self:center;min-width:0";
+  info.style.cssText = "min-width:0;align-self:center;padding:8px 0";
 
   const eyebrow = document.createElement("div");
-  eyebrow.textContent = "BUKASE STORE  /  PACKAGING COLLECTION";
-  eyebrow.style.cssText =
-    "font-size:11px;letter-spacing:2px;color:#9b7937;font-weight:800;margin-bottom:18px";
+  eyebrow.textContent = "THE BUKASE SELECTION";
+  eyebrow.style.cssText = `
+    color:#d5b66d;font-size:10px;letter-spacing:4px;
+    font-weight:700;margin-bottom:24px;
+  `;
 
   const title = document.createElement("h2");
   title.textContent = p.name;
-  title.style.cssText =
-    "font-size:clamp(30px,4vw,46px);line-height:1.12;margin:0 0 16px;color:#173c2d";
+  title.style.cssText = `
+    font-family:Georgia,'Times New Roman',serif;
+    font-size:clamp(36px,4.5vw,60px);
+    line-height:1.05;font-weight:500;letter-spacing:-1.5px;
+    margin:0 0 20px;color:#fff9e9;
+  `;
+
+  const goldLine = document.createElement("div");
+  goldLine.style.cssText = "width:76px;height:2px;background:#c7a65e;margin:0 0 24px";
 
   const desc = document.createElement("p");
-  desc.textContent = p.description || "Kemasan berkualitas untuk kebutuhan bisnis Anda.";
-  desc.style.cssText = "color:#69746b;line-height:1.9;font-size:15px";
+  desc.textContent = p.description || "Kemasan berkualitas yang dirancang untuk mendukung identitas bisnis Anda.";
+  desc.style.cssText = "font-size:14px;line-height:2;color:#d0d8cf;margin:0 0 28px;max-width:520px";
+
+  const pricePanel = document.createElement("div");
+  pricePanel.style.cssText = `
+    padding:22px 24px;margin-bottom:28px;
+    background:linear-gradient(110deg,#1b3a2a,#173224);
+    border:1px solid #8d784b;
+    border-left:3px solid #d6b66e;
+  `;
 
   const priceLabel = document.createElement("div");
-  priceLabel.textContent = "HARGA MULAI DARI";
-  priceLabel.style.cssText =
-    "font-size:11px;letter-spacing:2px;color:#8a7750;margin-top:26px";
+  priceLabel.textContent = "INVESTASI KEMASAN";
+  priceLabel.style.cssText = "font-size:9px;letter-spacing:3px;color:#d6bd81;margin-bottom:10px";
 
   const price = document.createElement("div");
   price.textContent = money(p.price);
-  price.style.cssText =
-    "font-size:clamp(28px,4vw,38px);font-weight:800;color:#173c2d;margin:8px 0 26px";
+  price.style.cssText = "font-family:Georgia,serif;font-size:clamp(32px,4vw,44px);color:#f5e7c0";
 
-  const divider = document.createElement("div");
-  divider.style.cssText = "height:1px;background:#e8e1d2;margin:22px 0";
+  const priceNote = document.createElement("div");
+  priceNote.textContent = "Harga dasar • Harga varian mengikuti pilihan";
+  priceNote.style.cssText = "font-size:11px;color:#bdc9bd;margin-top:10px";
+
+  pricePanel.append(priceLabel,price,priceNote);
 
   const heading = document.createElement("h3");
-  heading.textContent = "Pilih ukuran & varian";
-  heading.style.cssText = "font-size:17px;margin:0 0 16px";
+  heading.textContent = "PILIH UKURAN & VARIAN";
+  heading.style.cssText = "font-size:10px;letter-spacing:3px;color:#e4ca8d;margin:0 0 14px";
 
-  info.append(eyebrow,title,desc,priceLabel,price,divider,heading);
+  const variantList = document.createElement("div");
+  variantList.style.cssText = "display:grid;gap:12px";
+
+  info.append(eyebrow,title,goldLine,desc,pricePanel,heading,variantList);
   box.append(media,info);
 
-  const {data, error} = await db.from("product_variants")
+  const {data,error} = await db.from("product_variants")
     .select("id,variant_name,price,unit")
     .eq("product_id",p.id)
     .order("id");
@@ -3671,51 +3722,91 @@ async function showDetail(p) {
   if (error) {
     const msg = document.createElement("p");
     msg.textContent = "Varian belum dapat dimuat. Silakan coba lagi.";
-    msg.style.color = "#a33";
-    info.append(msg);
+    msg.style.cssText = "color:#ffcfb8;font-size:13px";
+    variantList.append(msg);
     return;
   }
 
-  if (!data || !data.length) {
-    const msg = document.createElement("p");
-    msg.textContent = "Belum ada varian tambahan untuk produk ini.";
-    msg.style.cssText = "color:#69746b;padding:16px;background:#f4f1e8;border-radius:10px";
-    info.append(msg);
+  if (!data || data.length === 0) {
+    const msg = document.createElement("div");
+    msg.textContent = "Varian tambahan belum tersedia. Silakan hubungi admin untuk konfirmasi ukuran.";
+    msg.style.cssText = `
+      padding:18px;background:#183729;border:1px solid #8d784b;
+      color:#e4e0d4;font-size:13px;line-height:1.8;
+    `;
+    variantList.append(msg);
   }
 
   (data || []).forEach(v => {
     const card = document.createElement("div");
     card.style.cssText = `
-      display:flex;flex-wrap:wrap;align-items:center;
-      justify-content:space-between;gap:14px;
-      padding:16px;margin:12px 0;
-      border:1px solid #ded8c8;border-radius:12px;background:#fff;
+      display:flex;align-items:center;justify-content:space-between;
+      flex-wrap:wrap;gap:16px;padding:18px;
+      border:1px solid #536b54;background:#173426;
+      transition:border-color .2s,background .2s;
     `;
+    card.onmouseenter = () => {
+      card.style.borderColor = "#d6b66e";
+      card.style.background = "#204431";
+    };
+    card.onmouseleave = () => {
+      card.style.borderColor = "#536b54";
+      card.style.background = "#173426";
+    };
 
     const details = document.createElement("div");
     const variant = document.createElement("div");
     variant.textContent = v.variant_name;
-    variant.style.cssText = "font-weight:800;font-size:15px";
+    variant.style.cssText = "font-size:15px;font-weight:700;color:#fff8e8";
 
     const variantPrice = document.createElement("div");
     variantPrice.textContent = money(v.price) + " / " + (v.unit || "pcs");
-    variantPrice.style.cssText = "color:#8b713b;margin-top:7px;font-size:14px";
+    variantPrice.style.cssText = "font-size:13px;color:#d8bd7b;margin-top:8px";
 
     details.append(variant,variantPrice);
 
     const addButton = document.createElement("button");
-    addButton.textContent = "＋ Tambah";
+    addButton.textContent = "＋  TAMBAH";
     addButton.type = "button";
     addButton.style.cssText = `
-      border:0;border-radius:8px;padding:13px 18px;
-      background:#173c2d;color:#fffdf7;font-weight:700;
-      cursor:pointer;
+      padding:13px 18px;border:1px solid #d8bd7b;
+      background:linear-gradient(135deg,#e4ca8d,#b28b42);
+      color:#17291c;font-size:10px;font-weight:800;
+      letter-spacing:1px;cursor:pointer;transition:filter .2s;
     `;
+    addButton.onmouseenter = () => addButton.style.filter = "brightness(1.1)";
+    addButton.onmouseleave = () => addButton.style.filter = "none";
     addButton.onclick = () => addToCart(p,v);
 
     card.append(details,addButton);
-    info.append(card);
+    variantList.append(card);
   });
+
+  const assurance = document.createElement("div");
+  assurance.style.cssText = `
+    display:flex;gap:14px;align-items:flex-start;
+    margin-top:26px;padding-top:22px;border-top:1px solid #536b54;
+  `;
+
+  const seal = document.createElement("div");
+  seal.textContent = "✦";
+  seal.style.cssText = "color:#d6b66e;font-size:25px;line-height:1";
+
+  const assuranceText = document.createElement("div");
+  assuranceText.innerHTML = `
+    <div style="font-family:Georgia,serif;font-size:17px;color:#f5e7c0;margin-bottom:7px">
+      Your Packaging Partner
+    </div>
+    <div style="font-size:12px;color:#bdc9bd;line-height:1.8">
+      Kemasan untuk mendukung kebutuhan dan identitas bisnis Anda.
+      Periksa kembali pilihan produk melalui keranjang sebelum checkout.
+    </div>
+  `;
+
+  assurance.append(seal,assuranceText);
+  info.append(assurance);
+}
+
 
   const assurance = document.createElement("div");
   assurance.innerHTML = `
