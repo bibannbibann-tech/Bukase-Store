@@ -1,4 +1,4 @@
-
+f
 
 <!DOCTYPE html>
 <html lang="id">
@@ -3449,7 +3449,18 @@ button,input,select{font-family:inherit!important}button{cursor:pointer!importan
     <label>Satuan</label><input id="vunit" value="pcs" placeholder="pcs / roll">
     <button onclick="saveVariant()">Tambah Varian</button>
     <div id="variantMsg" class="note"></div>
-
+<div class="admin-orders">
+  <h3>Kelola Pesanan</h3>
+  <p class="note">Daftar pesanan pelanggan BUKASE STORE.</p>
+  <button
+    type="button"
+    class="secondary"
+    onclick="loadAdminOrders()"
+  >
+    Muat Ulang Pesanan
+  </button>
+  <div id="adminOrders">Klik Muat Ulang Pesanan untuk melihat data.</div>
+</div>
 <div class="admin-stock-history">
   <h3>Riwayat Stok</h3>
   <p class="note">Catatan perubahan stok produk.</p>
@@ -4332,6 +4343,7 @@ async function login() {
    await loadProducts();
   renderAdminProducts();
   await loadStockHistory();
+  await loadAdminOrders();
   $("admin").scrollIntoView({behavior:"smooth"});
 }
 
@@ -4462,6 +4474,71 @@ if (oldStock !== Number(record.stock)) {
   saveButton.textContent = "Simpan Produk";
 }
 
+
+async function loadAdminOrders() {
+  const box = $("adminOrders");
+  if (!box) return;
+
+  if (!isAdmin || !currentUser) {
+    box.textContent = "Silakan login admin.";
+    return;
+  }
+
+  box.textContent = "Memuat pesanan...";
+
+  const { data, error } = await db
+    .from("orders")
+    .select("*")
+    .order("created_at", { ascending: false })
+    .limit(100);
+
+  if (error) {
+    box.textContent = "Gagal memuat pesanan: " + error.message;
+    return;
+  }
+
+  box.replaceChildren();
+
+  if (!data || data.length === 0) {
+    box.textContent = "Belum ada pesanan.";
+    return;
+  }
+
+  data.forEach(order => {
+    const card = document.createElement("article");
+    card.className = "stock-history-card";
+
+    const title = document.createElement("strong");
+    title.textContent =
+      order.order_number || "Pesanan #" + order.id;
+
+    const customer = document.createElement("p");
+    customer.textContent =
+      "Pelanggan: " + (order.customer_name || "-");
+
+    const total = document.createElement("p");
+    total.textContent =
+      "Total: Rp " +
+      Number(order.total || 0).toLocaleString("id-ID");
+
+    const status = document.createElement("p");
+    status.textContent =
+      "Status: " + (order.status || "pending");
+
+    const payment = document.createElement("p");
+    payment.textContent =
+      "Pembayaran: " +
+      (order.payment_status || "Menunggu pembayaran");
+
+    const date = document.createElement("small");
+    date.textContent = order.created_at
+      ? new Date(order.created_at).toLocaleString("id-ID")
+      : "";
+
+    card.append(title, customer, total, status, payment, date);
+    box.append(card);
+  });
+}
 
 
 
