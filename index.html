@@ -1,4 +1,4 @@
-f
+
 
 <!DOCTYPE html>
 <html lang="id">
@@ -4475,6 +4475,7 @@ if (oldStock !== Number(record.stock)) {
 }
 
 
+
 async function loadAdminOrders() {
   const box = $("adminOrders");
   if (!box) return;
@@ -4521,9 +4522,48 @@ async function loadAdminOrders() {
       "Total: Rp " +
       Number(order.total || 0).toLocaleString("id-ID");
 
-    const status = document.createElement("p");
-    status.textContent =
-      "Status: " + (order.status || "pending");
+    const statusLabel = document.createElement("label");
+    statusLabel.textContent = "Status pesanan: ";
+
+    const statusSelect = document.createElement("select");
+
+    [
+      ["pending", "Pesanan baru"],
+      ["diproses", "Sedang diproses"],
+      ["selesai", "Selesai"],
+      ["dibatalkan", "Dibatalkan"]
+    ].forEach(([value, label]) => {
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = label;
+      statusSelect.append(option);
+    });
+
+    statusSelect.value = order.status || "pending";
+
+    const saveButton = document.createElement("button");
+    saveButton.type = "button";
+    saveButton.textContent = "Simpan Status";
+
+    saveButton.addEventListener("click", async () => {
+      saveButton.disabled = true;
+      saveButton.textContent = "Menyimpan...";
+
+      const { error: updateError } = await db
+        .from("orders")
+        .update({ status: statusSelect.value })
+        .eq("id", order.id);
+
+      if (updateError) {
+        alert("Gagal mengubah status: " + updateError.message);
+      } else {
+        order.status = statusSelect.value;
+        alert("Status pesanan berhasil diperbarui!");
+      }
+
+      saveButton.disabled = false;
+      saveButton.textContent = "Simpan Status";
+    });
 
     const payment = document.createElement("p");
     payment.textContent =
@@ -4535,11 +4575,20 @@ async function loadAdminOrders() {
       ? new Date(order.created_at).toLocaleString("id-ID")
       : "";
 
-    card.append(title, customer, total, status, payment, date);
+    statusLabel.append(statusSelect);
+    card.append(
+      title,
+      customer,
+      total,
+      statusLabel,
+      saveButton,
+      payment,
+      date
+    );
+
     box.append(card);
   });
 }
-
 
 
 async function loadStockHistory() {
