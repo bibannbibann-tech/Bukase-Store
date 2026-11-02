@@ -4789,7 +4789,11 @@ box.append(notice);
     box.append(card);
   });
 }
-
+setInterval(() => {
+  if (isAdmin && currentUser) {
+    loadAdminOrders();
+  }
+}, 30000);
 
 async function loadStockHistory() {
   const box = $("stockHistory");
