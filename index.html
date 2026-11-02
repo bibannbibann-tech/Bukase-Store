@@ -4699,6 +4699,18 @@ const newOrders = data.filter(order =>
   (order.status || "pending") === "pending"
 ).length;
 
+if (
+  window.bukasePendingCount !== undefined &&
+  newOrders > window.bukasePendingCount
+) {
+  const audio = new Audio(
+    "https://actions.google.com/sounds/v1/alarms/beep_short.ogg"
+  );
+  audio.play().catch(() => {});
+}
+
+window.bukasePendingCount = newOrders;
+
 const notice = document.createElement("p");
 notice.textContent = "Pesanan baru: " + newOrders;
 notice.style.color = "#E5C16B";
