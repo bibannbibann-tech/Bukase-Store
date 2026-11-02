@@ -2592,8 +2592,18 @@ body {
 .hero-actions button {min-height:52px !important;padding:14px 21px !important;border-radius:13px !important;}
 .hero .hero-cta {background:linear-gradient(135deg,#f7e66f,#efd13c) !important;box-shadow:0 10px 24px rgba(243,217,78,.17) !important;}
 .hero .hero-cta:hover {background:#fff09b !important;transform:translateY(-3px) !important;}
-.hero .hero-ghost {background:rgba(255,255,255,.075) !important;backdrop-filter:blur(8px);}
-.hero .hero-ghost:hover {background:rgba(255,255,255,.16) !important;}
+.hero .hero-ghost {
+  background:rgba(229,193,107,.10) !important;
+  color:#F8E8BD !important;
+  border:1px solid rgba(229,193,107,.55) !important;
+  backdrop-filter:blur(10px);
+  transition:all .3s ease !important;
+}
+.hero .hero-ghost:hover {
+  background:rgba(229,193,107,.22) !important;
+  border-color:#E5C16B !important;
+  transform:translateY(-3px) !important;
+}
 .hero-benefits {gap:12px 20px !important;margin-top:34px !important;font-size:12px !important;}
 .hero-benefits span {padding:7px 10px;border:1px solid rgba(255,255,255,.12);border-radius:999px;background:rgba(255,255,255,.055);}
 .hero-art {min-height:370px !important;filter:drop-shadow(0 24px 26px rgba(0,0,0,.12));}
