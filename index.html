@@ -4695,7 +4695,16 @@ async function loadAdminOrders() {
     box.textContent = "Belum ada pesanan.";
     return;
   }
+const newOrders = data.filter(order =>
+  (order.status || "pending") === "pending"
+).length;
 
+const notice = document.createElement("p");
+notice.textContent = "Pesanan baru: " + newOrders;
+notice.style.color = "#E5C16B";
+notice.style.fontWeight = "bold";
+
+box.append(notice);
   data.forEach(order => {
     const card = document.createElement("article");
     card.className = "stock-history-card";
