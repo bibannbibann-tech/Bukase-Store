@@ -3850,6 +3850,8 @@ function home() {
   setActiveNav("home");
   $("back").style.display = "none";
   $("detail").classList.add("hidden");
+  $("cartPanel").classList.add("hidden");
+$("checkoutPanel").classList.add("hidden");
   $("catalog").replaceChildren();
   $("title").textContent = "Katalog Produk";
   $("desc").textContent = "Pilih kategori untuk melihat produk kemasan kami.";
